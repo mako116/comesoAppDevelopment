@@ -1,103 +1,119 @@
-import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
-import React from "react";
- 
-import { LinearGradient } from "expo-linear-gradient";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useRef } from "react";
 import AppIntroSlider from "react-native-app-intro-slider";
 import { onboardingSwiperData } from "@/constants/Constant";
 import { router } from "expo-router";
- import { commonstyles } from "@/styles/common/common.style";
+import { commonstyles } from "@/styles/common/common.style";
 
 export default function WelcomeIntroScreen() {
- 
+  const sliderRef = useRef<AppIntroSlider>(null); // Reference for controlling the slider
 
   const renderItem = ({ item }: { item: onboardingSwiperDataType }) => (
-    <View
-      style={{zIndex:10}}
-    > 
-      <View style={{ marginTop: 50 }}>
-        <Image
-          source={item.image}
-          style={{ alignSelf: "center", margin:"0%" }}
-        />
+    <View style={styles.slide}>
+      {/* Image Section */}
+      <View style={styles.imageContainer}>
+        <Image source={item.image} style={styles.image} resizeMode="cover" />
+      </View>
+
+      {/* Text Section */}
+      <View style={styles.textContainer}>
         <Text style={[commonstyles.title, { fontFamily: "Raleway_700Bold" }]}>
           {item.title}
         </Text>
-        <View style={{ marginTop: 15 }}>
-          <Text
-            style={[commonstyles.description, { fontFamily: "Nunito_400Regular" }]}
-          >
-            {item.description}
-          </Text>
-          <Text
-            style={[
-              commonstyles.description,
-              { fontFamily: "Nunito_400Regular" },
-            ]}
-          >
-            {item.sortDescription}
-          </Text>
-          <Text
-            style={[commonstyles.description, { fontFamily: "Nunito_400Regular" }]}
-          >
-            {item.sortDescription2}
-          </Text>
-        </View>
-      </View>
-      <View style={{margin:"auto"}}>
-      <TouchableOpacity
-    onPress={()=> router.push("/(routes)/Welcome-intro")}
-    style={commonstyles.buttonWrapper}>
-      <Text style={[commonstyles.buttonText,{ fontFamily:"Nunito_700bold"}]}>
-        Getting Started
-      </Text>
-    </TouchableOpacity>
+        <Text
+          style={[commonstyles.description, { fontFamily: "Nunito_400Regular" }]}
+        >
+          {item.description}
+        </Text>
+        <Text
+          style={[commonstyles.description, { fontFamily: "Nunito_400Regular" }]}
+        >
+          {item.sortDescription}
+        </Text>
+        <Text
+          style={[commonstyles.description, { fontFamily: "Nunito_400Regular" }]}
+        >
+          {item.sortDescription2}
+        </Text>
       </View>
     </View>
   );
 
+  const handleButtonPress = (activeIndex: number) => {
+    if (activeIndex === onboardingSwiperData.length - 1) {
+      // If it's the last slide, navigate to /login
+      router.push("/(routes)/onboarding");
+    } else {
+      // Otherwise, skip to the next slide
+      sliderRef.current?.goToSlide(activeIndex + 1);
+    }
+  };
+
   return (
     <AppIntroSlider
+      ref={sliderRef} // Attach slider reference
       renderItem={renderItem}
       data={onboardingSwiperData}
-      onDone={() => {
-        router.push("/login");
-      }}
-      onSkip={() => {
-        router.push("/login");
-      }}
-      renderNextButton={() => (
-        <View style={commonstyles.welcomeButton}>
-          <Text style={[{ fontFamily: "Nunito_700Bold" }]}>
-            Next
-          </Text>
-        </View>
-      )}
-      renderDoneButton={() => (
-        <View style={commonstyles.welcomeButton}>
-          <Text style={[{ fontFamily: "Nunito_700Bold" }]}>
-            Done
-          </Text>
-        </View>
-      )}
-      showSkipButton={false}
-      bottomButton={false} // Disable the bottom button layout
-      dotStyle={commonstyles.dotStyle} // Custom dot style
-      activeDotStyle={commonstyles.activeDotStyle} // Custom active dot style
       renderPagination={(activeIndex) => (
-        <View style={commonstyles.paginationContainer}>
+        <View style={styles.paginationContainer}>
+          {/* Pagination Dots */}
           {onboardingSwiperData.map((_, index) => (
             <View
               key={index}
-              style={[
-                commonstyles.paginationDot,
-                activeIndex === index && commonstyles.activePaginationDot,
-              ]}
+              
             />
           ))}
+
+          {/* "Getting Started" Button */}
+          <TouchableOpacity
+            onPress={() => handleButtonPress(activeIndex)}
+            style={commonstyles.buttonWrapper}
+          >
+            <Text
+              style={[commonstyles.buttonText, { fontFamily: "Nunito_700Bold" }]}
+            >
+              {activeIndex === onboardingSwiperData.length - 1
+                ? "Getting Started"
+                : "Getting Started"}
+            </Text>
+          </TouchableOpacity>
         </View>
       )}
+      showSkipButton={false}
+      bottomButton={false}
     />
   );
 }
 
- 
+const styles = StyleSheet.create({
+  slide: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+  },
+  imageContainer: {
+    flex: 2,
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+  },
+  image: {
+    width: "100%",
+    height: 250, // Set a fixed height for all images
+    borderRadius: 10,
+  },
+  textContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  paginationContainer: {
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 20,
+  },
+   
+});
