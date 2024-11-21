@@ -1,8 +1,9 @@
 import { View, Text, Image, StyleSheet } from 'react-native'
 import React from 'react'
-import WelcomeIntroScreen from './SwiperOnboarding'
-
-export default function SwipeOptions() {
+import LoginScreen from '@/components/AuthSections/Logins/Login';
+import FingerPrintScreen from '@/components/AuthSections/FingerPrinting/FingerPrinting';
+  
+export default function Fingerprint() {
   return (
     <View style={styles.background}>
     <View
@@ -10,7 +11,7 @@ export default function SwipeOptions() {
             position:"absolute",right:"-0%",borderTopLeftRadius:50
        }}>
      <Image
-      source={require('../../assets/images/Ellipse2.png')}
+      source={require('../../../assets/images/Ellipse2.png')}
        
       />
      </View>
@@ -20,11 +21,11 @@ export default function SwipeOptions() {
             justifyContent:"center"
        }}>
      <Image
-      source={require('../../assets/images/Ellipse.png')}
+      source={require('../../../assets/images/Ellipse.png')}
     //   style={{zIndex:-10}} 
       />
      </View>
-     <WelcomeIntroScreen/>
+     <FingerPrintScreen/>
      
     </View>
   )
