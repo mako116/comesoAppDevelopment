@@ -45,7 +45,7 @@ export default function WelcomeIntroScreen() {
       </View>
       <View style={{margin:"auto"}}>
       <TouchableOpacity
-    onPress={()=> router.push("/(routes)/Welcome-intro")}
+    onPress={()=>{router.replace("/(routes)/login"); } }
     style={commonstyles.buttonWrapper}>
       <Text style={[commonstyles.buttonText,{ fontFamily:"Nunito_700bold"}]}>
         Getting Started
