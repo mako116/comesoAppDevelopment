@@ -12,7 +12,7 @@ export const onboardingSwiperData: onboardingSwiperDataType[] = [
         description: "We guarantee the best ",
         sortDescription: "experience on our .",
         sortDescription2:"platform",
-        image: require("@/assets/images/frame2.png")
+        image: require("@/assets/images/Frame2.png")
     },
     {
         id:3,
@@ -20,7 +20,7 @@ export const onboardingSwiperData: onboardingSwiperDataType[] = [
         description: "Track all transactions ",
         sortDescription: "made by you to all your .",
         sortDescription2:"beneficiaries",
-        image: require("@/assets/images/frame3.png")
+        image: require("@/assets/images/Frame3.png")
     },
     
 ]; 
