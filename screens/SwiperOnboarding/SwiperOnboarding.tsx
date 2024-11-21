@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import React from "react";
 import AppIntroSlider from "react-native-app-intro-slider";
 import { LinearGradient } from "expo-linear-gradient";
@@ -40,7 +40,7 @@ export default function WelcomeIntroScreen() {
       <TouchableOpacity
       onPress={( )=> router.push("/(routes)/onboarding-section")}
         // onPress={() => router.push("/(routes)/onboarding-section")}
-        style={commonstyles.buttonWrapper}
+        style={[commonstyles.buttonWrapper, {top: '-7.5%'}]}
       >
         <Text style={[commonstyles.buttonText, { fontFamily: "Nunito_700Bold" }]}>
           Getting Started
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 20,
-    paddingVertical:20, 
+    // paddingVertical:20, 
   },
   imageContainer: {
     flex: 2,
