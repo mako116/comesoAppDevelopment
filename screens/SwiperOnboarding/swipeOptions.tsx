@@ -7,16 +7,17 @@ export default function SwipeOptions() {
     <View style={styles.background}>
     <View
        style={{
-            position:"absolute",right:"-0%",borderTopLeftRadius:50
+            position:"absolute",right:"-10%",borderTopLeftRadius:50
        }}>
      <Image
       source={require('../../assets/images/Ellipse2.png')}
-      style={{}} 
+      style={{width:'70%', height:'40%'}} 
+      resizeMode='contain'
       />
      </View>
      <View
        style={{
-            position:"absolute",left:"-15%",bottom:"0%",borderTopLeftRadius:50, 
+            position:"absolute",left:"-5%",bottom:"0%",borderTopLeftRadius:50, 
             justifyContent:"center"
        }}>
      <Image

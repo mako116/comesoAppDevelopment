@@ -20,21 +20,35 @@ export default function WelcomeIntroScreen() {
         <Text style={[commonstyles.title, { fontFamily: "Raleway_700Bold" }]}>
           {item.title}
         </Text>
-        <Text
-          style={[commonstyles.description, { fontFamily: "Nunito_400Regular" }]}
-        >
-          {item.description}
-        </Text>
-        <Text
-          style={[commonstyles.description, { fontFamily: "Nunito_400Regular" }]}
-        >
-          {item.sortDescription}
-        </Text>
-        <Text
-          style={[commonstyles.description, { fontFamily: "Nunito_400Regular" }]}
-        >
-          {item.sortDescription2}
-        </Text>
+        <View style={{ marginTop: 15 }}>
+          <Text
+            style={[commonstyles.description, { fontFamily: "Nunito_400Regular" }]}
+          >
+            {item.description}
+          </Text>
+          <Text
+            style={[
+              commonstyles.description,
+              { fontFamily: "Nunito_400Regular" },
+            ]}
+          >
+            {item.sortDescription}
+          </Text>
+          <Text
+            style={[commonstyles.description, { fontFamily: "Nunito_400Regular" }]}
+          >
+            {item.sortDescription2}
+          </Text>
+        </View>
+      </View>
+      <View style={{margin:"auto"}}>
+      <TouchableOpacity
+    onPress={()=>{router.replace("/(routes)/login"); } }
+    style={commonstyles.buttonWrapper}>
+      <Text style={[commonstyles.buttonText,{ fontFamily:"Nunito_700bold"}]}>
+        Getting Started
+      </Text>
+    </TouchableOpacity>
       </View>
     </View>
   );
