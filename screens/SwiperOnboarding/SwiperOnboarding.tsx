@@ -1,5 +1,5 @@
+import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import React, { useState } from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import AppIntroSlider from "react-native-app-intro-slider";
 import { onboardingSwiperData } from "@/constants/Constant";
 import { router } from "expo-router";
@@ -40,21 +40,9 @@ export default function WelcomeIntroScreen() {
 
       {/* Button Section */}
       <TouchableOpacity
-        onPress={() => {
-          if (clickCount === 0) {
-            // First button click navigates to the second slide
-            setClickCount(1);
-            sliderRef.current?.goToSlide(1); // Navigate to the second slide
-          } else if (clickCount === 1) {
-            // Second button click navigates to the last slide
-            setClickCount(2);
-            sliderRef.current?.goToSlide(onboardingSwiperData.length - 1); // Navigate to the last slide
-          } else {
-            // Third button click navigates to the onboarding section
-            router.push("/(routes)/onboarding-section");
-          }
-        }}
-        style={commonstyles.buttonWrapper}
+      onPress={( )=> router.push("/(routes)/onboarding-section")}
+        // onPress={() => router.push("/(routes)/onboarding-section")}
+        style={[commonstyles.buttonWrapper, {top: '-7.5%'}]}
       >
         <Text style={[commonstyles.buttonText, { fontFamily: "Nunito_700Bold" }]}>
           {clickCount === 0
@@ -109,7 +97,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 20,
-    paddingVertical: 20,
+    // paddingVertical:20, 
   },
   imageContainer: {
     flex: 2,
