@@ -30,6 +30,7 @@ export default function LoginScreen() {
         setError({ password: "" });
         setButtonSpinner(false);
         // Replace with API call or navigation logic
+        router.push("(tabs)/home");
         alert("Logged in successfully!");
       }
     }, 2000);

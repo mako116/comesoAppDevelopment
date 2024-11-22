@@ -4,17 +4,19 @@ import {
   Text, 
   TextInput, 
   StyleSheet, 
-  FlatList 
+  FlatList, 
+  TouchableOpacity
 } from "react-native";
 import { EvilIcons, Feather, MaterialIcons } from "@expo/vector-icons";
+import { router } from "expo-router";
 
 const SearchScreen = () => {
   const [searchText, setSearchText] = useState("");
 
   const transactions = [
-    { id: "1", title: "University Teaching Hospital, Ibadan, Oyo state", para: "Off New Bodija, Ibadan 200132, Oyo State, Nigeria.", amount: "$5.00" },
-    { id: "2", title: "Allen Avenue, Maryland 200132, Lagos State, Nige.", para: "Off New Bodija, Ibadan 200132, Oyo State, Nigeria.", amount: "$50.00" },
-    { id: "3", title: "Allen Avenue, Maryland 200132, Lagos State, Nige.", para: "Off New Bodija, Ibadan 200132, Oyo State, Nigeria.", amount: "$30.00" },
+    { id: "1", title: "University Teaching Hospital, Ibadan, Oyo state", para: "Off New Bodija, Ibadan 200132, Oyo State, Nigeria.",  },
+    { id: "2", title: "Allen Avenue, Maryland 200132, Lagos State, Nige.", para: "Off New Bodija, Ibadan 200132, Oyo State, Nigeria.",  },
+    { id: "3", title: "Allen Avenue, Maryland 200132, Lagos State, Nige.", para: "Off New Bodija, Ibadan 200132, Oyo State, Nigeria.", },
   ];
 
   const filteredTransactions = transactions.filter((transaction) =>
@@ -24,28 +26,25 @@ const SearchScreen = () => {
   const renderTransactionItem = ({ item }) => (
     <View style={styles.transactionItem}>
       <View style={styles.transactionDetails}>
-        <View style={styles.iconContainer}>
-          <EvilIcons name="location" size={14} color="black" />
-        </View>
-        <View>
+        <View style={{flexDirection:'row', gap:5, justifyContent:'center', alignItems:'center'}}>
+          <EvilIcons name="location" size={20} color="#0A2EE2" />
+          <View>
           <Text style={styles.transactionTitle}>{item.title}</Text>
           <View style={styles.transactionSubDetails}>
-            <Text style={styles.transactionType}>{item.type}</Text>
+            
             <Text style={styles.transactionDate}>{item.para}</Text>
           </View>
         </View>
+        </View>
+       
       </View>
      </View>
   );
 
-  const renderRecentItem = () => (
-    <View style={styles.recentTransactionsContainer}>
-      <EvilIcons name="location" size={24} color="black" />
-      <Text style={styles.recentText}>Nearest facilities close to you</Text>
-    </View>
-  );
+ 
 
   const renderHeader = () => (
+    <>
     <View style={styles.container}>
       {/* Search Bar */}
       <Text style={styles.headerText}>Search or select from recent healthcare provider</Text>
@@ -53,20 +52,28 @@ const SearchScreen = () => {
         <MaterialIcons name="search" size={24} color="#8E949A" style={styles.searchIcon} />
         <TextInput
           style={styles.searchInput}
-          placeholder="Search transactions"
+          // placeholder="Search transactions"
           placeholderTextColor="#8E949A"
           value={searchText}
           onChangeText={setSearchText}
         />
       </View>
     </View>
+
+    <TouchableOpacity style={styles.recentTransactionsContainer} onPress={()=>router.push("search-facilities")}>
+      <EvilIcons name="location" size={24} color="white" />
+      <Text style={styles.recentText}>Nearest facilities close to you</Text>
+    </TouchableOpacity>
+    
+    </>
+    
   );
 
   return (
     <FlatList
       ListHeaderComponent={renderHeader}
       data={filteredTransactions}
-      ListFooterComponent={renderRecentItem}
+      // ListHeaderComponent={renderRecentItem}
       renderItem={renderTransactionItem}
       keyExtractor={(item) => item.id}
       contentContainerStyle={styles.scrollViewContainer}
@@ -76,7 +83,11 @@ const SearchScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
+    // paddingHorizontal: 16,
+    // paddingVertical: 15,
+    paddingHorizontal:'1%',
+    marginTop:'8%'
+    
   },
   headerText: {
     fontWeight: "400",
@@ -102,6 +113,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 2,
     elevation: 3,
+    
+   
   },
   searchIcon: {
     marginRight: 10,
@@ -110,6 +123,9 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 16,
     color: "#333",
+    height:32,
+    
+   
   },
   recentTransactionsContainer: {
     backgroundColor: "#0A2EE2",
@@ -124,6 +140,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 3,
     alignItems: "center",
+    top: '-10%'
   },
   recentText: {
     marginLeft: 10,
@@ -133,7 +150,8 @@ const styles = StyleSheet.create({
   transactionItem: {
     flexDirection: "row",
     alignItems: "center",
-   justifyContent:"center"
+   justifyContent:"center",
+   marginBottom:'5%'
    
   },
   transactionDetails: {
@@ -141,9 +159,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
        justifyContent:"center"
    },
-  iconContainer: {
-    marginRight: 15,
-  },
+  
   transactionTitle: {
     fontSize: 14,
     fontWeight: "600",
@@ -154,10 +170,10 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     gap: 10,
   },
-  transactionType: {
-    fontSize: 14,
-    color: "#8E949A",
-  },
+  // transactionType: {
+  //   fontSize: 14,
+  //   color: "#8E949A",
+  // },
   transactionDate: {
     fontSize: 14,
     color: "#8E949A",
