@@ -83,7 +83,7 @@ export default function SignUpScreen() {
            
         </View>
         {/* Phone Number Input */}
-     <View style={styles.container}>
+     {/* <View style={styles.container}>
            <View style={styles.phoneContainer}>
             <CountryPicker
               countryCode={countryCode}
@@ -106,7 +106,7 @@ export default function SignUpScreen() {
             />
           </View>
            
-        </View>
+        </View> */}
 
         <View style={{ marginTop: 20,flexDirection:"row", alignItems:"center"}}>
         {/* Password Input */}
