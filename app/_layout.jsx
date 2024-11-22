@@ -15,9 +15,8 @@ export default function RootLayout() {
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-    SofiaProBlack: require('../assets/fonts/Sofia Pro Black Az.otf'),
-    SofiaProBoldItalic: require('../assets/fonts/Sofia Pro Bold Italic Az.otf'),
-  });
+    Poppins: require('../assets/fonts/Poppins-Regular.ttf'),
+  }); 
 
   useEffect(() => {
     if (loaded) {
@@ -39,11 +38,10 @@ export default function RootLayout() {
       options={{
         headerShown: false,
       }}
-    />
-    {/* <Stack.Screen name="(tabs)" /> */}
-    
+    />    
     {/* Add the Confirmation screen here */}
     <Stack.Screen name="(routes)/TrfConfirm/index"   />
   </Stack>
     );
+  
 }
