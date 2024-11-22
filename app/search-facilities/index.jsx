@@ -1,6 +1,7 @@
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { router } from "expo-router";
 
 const SearchFacilities = () => {
   return (
@@ -63,7 +64,7 @@ const SearchFacilities = () => {
         <Text style={{fontFamily:'Poppins', fontWeight:'bold', fontSize:14}}>University Teaching Hospital</Text>
         <Text style={{fontFamily:"Poppins", fontWeight:400, fontSize:12}}>No 15, Kwara Street, Maryland, Lagos</Text>
         </View>
-        <TouchableOpacity style={{flex:1}}>
+        <TouchableOpacity style={{flex:1}} >
           <Image source={require('../../assets/images/rightArrow.png')} width={30} height={30}/>
         </TouchableOpacity>
         </View>
@@ -137,7 +138,7 @@ const SearchFacilities = () => {
         <Text style={{fontFamily:'Poppins', fontWeight:'bold', fontSize:14}}>University Teaching Hospital</Text>
         <Text style={{fontFamily:"Poppins", fontWeight:400, fontSize:12}}>No 15, Kwara Street, Maryland, Lagos</Text>
         </View>
-        <TouchableOpacity style={{flex:1}}>
+        <TouchableOpacity onPress={()=>router.push('beneficiary')} style={{flex:1}}>
           <Image source={require('../../assets/images/rightArrow.png')} width={30} height={30}/>
         </TouchableOpacity>
         </View>
