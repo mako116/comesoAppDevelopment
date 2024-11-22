@@ -21,7 +21,7 @@ const Dashs = StyleSheet.create({
     boardContent: {
       paddingHorizontal: 30,
       paddingVertical: 30,
-      gap:20,
+      gap:10,
       backgroundColor: "rgba(10, 46, 226, 0.7)", // Semi-transparent background for text
       borderRadius: 9,
     },

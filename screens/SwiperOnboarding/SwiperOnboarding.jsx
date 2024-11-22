@@ -11,7 +11,7 @@ export const onboardingSwiperData = [
     description: "Enjoy seamless payment.",
     sortDescription: "processes",
     sortDescription2: "",
-    image: require("@/assets/images/frame1.png"), // Ensure this path is correct for your project setup
+    image: require("../../assets/images/frame1.png"), // Ensure this path is correct for your project setup
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ export const onboardingSwiperData = [
     description: "We guarantee the best",
     sortDescription: "experience on our.",
     sortDescription2: "platform",
-    image: require("@/assets/images/Frame2.png"), // Ensure this path is correct for your project setup
+    image: require("../../assets/images/Frame2.png"), // Ensure this path is correct for your project setup
   },
   {
     id: 3,
@@ -27,7 +27,7 @@ export const onboardingSwiperData = [
     description: "Track all transactions",
     sortDescription: "made by you to all your.",
     sortDescription2: "beneficiaries",
-    image: require("@/assets/images/Frame3.png"), // Ensure this path is correct for your project setup
+    image: require("../../assets/images/Frame3.png"), // Ensure this path is correct for your project setup
   },
 ];
 

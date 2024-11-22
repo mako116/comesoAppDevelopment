@@ -7,7 +7,7 @@ const  OnBoardingScreen =()=> {
     useEffect(()=>{
         setTimeout(() => {
             // router.push("/(tabs)/home")
-            router.push("/(tabs)/home")
+            router.push("/(routes)/Welcome-intro")
          }, 2000);
     },[])
 
