@@ -5,7 +5,7 @@ import { StyleSheet } from "react-native";
       textAlign: "center",
       fontSize: 24,
     },
-    learningText: {
+    learningText: {  
       textAlign: "center",
       color: "#575757",
       fontSize: 15,
@@ -59,6 +59,13 @@ import { StyleSheet } from "react-native";
       backgroundColor: "#0A2EE2",
       marginTop: 19,
     },
+    loginButtons: {
+      padding: 19,
+      borderRadius: 8,
+      marginHorizontal: 5,
+      backgroundColor: "#0A2EE2",
+      marginTop: 19,
+    },
     loginButtonText: {
       color: "white",
       textAlign: "center",
@@ -92,4 +99,4 @@ import { StyleSheet } from "react-native";
   });
 
 
-  export default SectionsLogin;
+  export default SectionsLogin;   

@@ -1,14 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+ import MobileTransferMain from '../../../screens/MobileTransfer/MobileTransferMain'
 
-const index = () => {
+const Send = () => {
   return (
-    <View>
-      <Text>index</Text>
-    </View>
+     <MobileTransferMain/>
   )
 }
 
-export default index
+export default Send
 
 const styles = StyleSheet.create({})
