@@ -48,14 +48,14 @@ export default function LoginScreen() {
         <View style={{
          
         }}>
-      <Text style={[SectionsLogin.welcomeText, { color:"#0A2EE2", lineHeight:43.95, fontWeight:"400" }]}>
+      <Text style={[SectionsLogin.welcomeText, {fontFamily: 'SofiaPro', color:"#0A2EE2", lineHeight:43.95, fontWeight:"400" }]}>
         Login to Your Account
       </Text>
       <View style={SectionsLogin.inputContainer}>
         {/* Email Input */}
         <View>
           <TextInput
-            style={[SectionsLogin.input, { paddingHorizontal: 0 }]}
+            style={[SectionsLogin.input, {fontFamily: 'SofiaPro', paddingHorizontal: 0 }]}
             keyboardType="email-address"
             value={userInfo.email}
             placeholder="user Id"
@@ -69,7 +69,7 @@ export default function LoginScreen() {
         {/* Password Input */}
         <View style={{ marginTop: 15 }}>
           <TextInput
-            style={SectionsLogin.input}
+            style={[SectionsLogin.input,{fontFamily: 'SofiaPro',}]}
             secureTextEntry={!isPasswordVisible}
             value={userInfo.password}
             placeholder="password"
@@ -78,7 +78,7 @@ export default function LoginScreen() {
             }
           />
           <TouchableOpacity
-            style={SectionsLogin.visibleIcon}
+            style={[SectionsLogin.visibleIcon,{fontFamily: 'SofiaPro',}]}
             onPress={() => setPasswordVisible(!isPasswordVisible)}
           >
             {isPasswordVisible ? (
@@ -100,7 +100,7 @@ export default function LoginScreen() {
           {buttonSpinner ? (
             <ActivityIndicator size="small" color={"white"} />
           ) : (
-            <Text style={SectionsLogin.loginButtonText}>Login</Text>
+            <Text style={[SectionsLogin.loginButtonText,{fontFamily: 'SofiaPro',}]}>Login</Text>
           )}
         </TouchableOpacity>
 
@@ -108,7 +108,7 @@ export default function LoginScreen() {
         <TouchableOpacity
           onPress={() => router.push("/(routes)/forgot-password")}
         >
-          <Text style={[SectionsLogin.forgotSection, { fontFamily: "Nunito_600SemiBold" }]}>
+          <Text style={[SectionsLogin.forgotSection, { fontFamily: 'SofiaPro', }]}>
             Forget User / Forgot Password ?
           </Text>
         </TouchableOpacity>
@@ -120,7 +120,7 @@ export default function LoginScreen() {
 
         {/* Sign Up Redirect */}
         <View style={SectionsLogin.signupRedirect}>
-          <Text style={{ fontSize: 18,  lineHeight:26.37, fontWeight:"400", color:"#8E949A"}}>
+          <Text style={{fontFamily: 'SofiaPro', fontSize: 18,  lineHeight:26.37, fontWeight:"400", color:"#8E949A"}}>
             Don’t have an account?
           </Text>
           <TouchableOpacity

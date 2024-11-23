@@ -41,17 +41,17 @@ export default function WelcomeIntroScreen() {
 
       {/* Text Section */}
       <View style={styles.textContainer}>
-        <Text style={[commonstyles.title, { fontFamily: "Raleway_700Bold" }]}>
+        <Text style={[commonstyles.title, {fontFamily: 'Poppins',}]}>
           {item.title}
         </Text>
-        <Text style={[commonstyles.description, { fontFamily: "Nunito_400Regular" }]}>
+        <Text style={[commonstyles.description, { fontFamily: 'Poppins',}]}>
           {item.description}
         </Text>
-        <Text style={[commonstyles.description, { fontFamily: "Nunito_400Regular" }]}>
+        <Text style={[commonstyles.description, { fontFamily: 'Poppins',}]}>
           {item.sortDescription}
         </Text>
         {item.sortDescription2 && (
-          <Text style={[commonstyles.description, { fontFamily: "Nunito_400Regular" }]}>
+          <Text style={[commonstyles.description, { fontFamily: 'Poppins',}]}>
             {item.sortDescription2}
           </Text>
         )}
@@ -62,7 +62,9 @@ export default function WelcomeIntroScreen() {
         onPress={() => router.push("/(routes)/onboarding-section")}
         style={[commonstyles.buttonWrapper, { top: "-7.5%" }]}
       >
-        <Text style={[commonstyles.buttonText, { fontFamily: "Nunito_700Bold" }]}>
+        <Text style={[commonstyles.buttonText, { fontFamily: 'Poppins',fontSize: 24,
+         fontWeight:"600",
+          }]}>
           Getting Started
         </Text>
       </TouchableOpacity>
@@ -75,12 +77,12 @@ export default function WelcomeIntroScreen() {
       data={onboardingSwiperData}
       renderNextButton={() => (
         <View style={commonstyles.welcomeButton}>
-          <Text style={[{ fontFamily: "Nunito_700Bold" }]}>Next</Text>
+          <Text style={[{ fontFamily: 'Poppins', }]}>Next</Text>
         </View>
       )}
       renderDoneButton={() => (
         <View style={commonstyles.welcomeButton}>
-          <Text style={[{ fontFamily: "Nunito_700Bold" }]}>Done</Text>
+          <Text style={[{ fontFamily: 'Poppins', }]}>Done</Text>
         </View>
       )}
       showSkipButton={false}
@@ -126,5 +128,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    marginBottom:20
   },
 });

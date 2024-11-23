@@ -1,0 +1,31 @@
+/* Define SpaceMono */
+@font-face {
+    font-family: 'SpaceMono';
+    src: url("../fonts/Sofia\ Pro\ Regular\ Az.otf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  /* Define Poppins */
+  @font-face {
+    font-family: 'Poppins';
+    src: url('../fonts/Poppins-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  /* Define Sofia Pro Medium */
+  @font-face {
+    font-family: 'SofiaProMedium';
+    src: url('../fonts/SofiaProMedium.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+
+
+
+  .para {
+    font-size: "50px";
+    font-family: 'SofiaProMedium', serif;
+  }

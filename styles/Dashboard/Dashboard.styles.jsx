@@ -22,10 +22,11 @@ const Dashs = StyleSheet.create({
       paddingHorizontal: 30,
       paddingVertical: 30,
       gap:10,
-      backgroundColor: "rgba(10, 46, 226, 0.7)", // Semi-transparent background for text
+      // backgroundColor: "rgba(10, 46, 226, 0.7)",  
       borderRadius: 9,
     },
     balanceText: {
+       fontFamily: 'Sora',
       fontWeight: "400",
       fontSize: 14,
       lineHeight: 17.64,
@@ -34,13 +35,15 @@ const Dashs = StyleSheet.create({
       color: "#fff",
     },
     balanceAmount: {
-      fontWeight: "600",
+      fontFamily: 'Sora',
+      fontWeight: "700",
       fontSize: 28,
       lineHeight: 32.28,
-      letterSpacing: -2,
+      // letterSpacing: -2,
       color: "#fff",
     },
     holderText: {
+      fontFamily: 'Sora',
       fontWeight: "400",
       fontSize: 12,
       lineHeight: 17.58,
@@ -48,7 +51,8 @@ const Dashs = StyleSheet.create({
       color: "#fff",
     },
     holderName: {
-      fontWeight: "600",
+      fontFamily: 'Sora',
+      fontWeight: "700",
       fontSize: 18,
       lineHeight: 26.37,
       color: "#fff",
@@ -58,6 +62,7 @@ const Dashs = StyleSheet.create({
       marginTop: 20,
     },
     sectionTitle: {
+      fontFamily: 'SofiaPro',
       fontSize: 18,
       fontWeight: "600",
       color: "#23303B",
@@ -88,6 +93,7 @@ const Dashs = StyleSheet.create({
       borderRadius: 30,
     },
     actionBoxText: {
+      fontFamily: 'Poppins',
       color: "#8E949A",
       fontWeight: "500",
       fontSize: 13,

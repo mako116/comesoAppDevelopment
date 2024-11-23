@@ -80,11 +80,12 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
     lineHeight:43.95,
-    // textAlign: "center",
+    fontFamily: 'SofiaPro',
     color: "#2d2d2d",
     marginBottom: 10,
   },
   description: {
+    fontFamily: 'SofiaPro',
     fontSize: 18,
     lineHeight:25.2,
     textAlign: "center",

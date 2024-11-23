@@ -34,6 +34,7 @@ const  OnboardingAuth =()=> {
             color: "#333333",
             fontWeight: "600",
             fontSize: 24,
+            fontFamily: 'Poppins',
            }}
         >
           What kind of account would you like to open today?
@@ -62,12 +63,13 @@ const  OnboardingAuth =()=> {
           <Octicons name="person" size={20} color="black"  />
           </View>
           <View style={{ flex: 1 }}>
-            <Text style={{color:"#0A2EE2", fontWeight: "700", fontSize: 16, marginBottom: 5 }}>
+            <Text style={{fontFamily: 'Poppins',color:"#0A2EE2", fontWeight: "700", fontSize: 16, marginBottom: 5 }}>
               User Account
             </Text>
             <Text
               style={{
                 fontWeight: "400",
+                fontFamily: 'Poppins',
                 fontSize: 12,
                 lineHeight: 16,
                 color: "#333333",
@@ -91,11 +93,11 @@ const  OnboardingAuth =()=> {
             gap:20
           }}
         >
-          <View style={{backgroundColor:"#A4A9AE40", padding:10, justifyContent:"center", borderRadius:"50%"}}>
+          <View style={{fontFamily: 'Poppins',backgroundColor:"#A4A9AE40", padding:10, justifyContent:"center", borderRadius:"50%"}}>
           <MaterialCommunityIcons name="briefcase-variant-outline" size={24} color="black" />
           </View>
           <View style={{ flex: 1 }}>
-            <Text style={{color:"#0A2EE2", fontWeight: "600", fontSize: 16, marginBottom: 5 }}>
+            <Text style={{fontFamily: 'Poppins',color:"#0A2EE2", fontWeight: "700", fontSize: 16, marginBottom: 5 }}>
               Business Account
             </Text>
             <Text
@@ -103,10 +105,11 @@ const  OnboardingAuth =()=> {
                 fontWeight: "400",
                 fontSize: 12,
                 lineHeight: 16,
+                fontFamily: 'Poppins',
                 color: "#333333",
               }}
             >
-              Top up your wallet, manage business funds, and more.
+              Partner with us as a health facility and get paid through us.
             </Text>
           </View>
           <SimpleLineIcons name="arrow-right" size={14} color="black" />

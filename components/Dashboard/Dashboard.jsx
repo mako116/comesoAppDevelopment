@@ -5,6 +5,41 @@ import Dashs from "../../styles/Dashboard/Dashboard.styles";
 import Header from "../../screens/Dashboard/Header";
 
 const DashboardScreen = () => {
+  const transactions = [
+    {
+      id: 1,
+      type: "Account Top-up",
+      status: "Received",
+      date: "Feb 25, 2022",
+      amount: "$5.00 USD",
+      icon: "arrow-down-left",
+      iconColor: "#04AD29",
+      backgroundColor: "#E0F7EC",
+      textColor: "#04AD29",
+    },
+    {
+      id: 2,
+      type: "Transfer Out",
+      status: "Sent",
+      date: "Feb 26, 2022",
+      amount: "$10.00 USD",
+      icon: "arrow-up-right",
+      iconColor: "#F8332F",
+      backgroundColor: "#FEE0E0",
+      textColor: "#F8332F",
+    },
+    {
+      id: 3,
+      type: "Purchase",
+      status: "Completed",
+      date: "Feb 27, 2022",
+      amount: "$20.00 USD",
+      icon: "arrow-up-right",
+      iconColor: "#F8332F",
+      backgroundColor: "#FEE0E0",
+      textColor: "#F8332F",
+    },
+  ];
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContainer}>
       <Header/>
@@ -62,62 +97,73 @@ const DashboardScreen = () => {
             </TouchableOpacity>
           </View>
 
-          <View style={Dashs.transactionItem}>
-            <View style={Dashs.transactionRow}>
-              <View style={Dashs.transactionIcon}>
-                <Feather name="arrow-down-left" size={24} color="#04AD29" />
-              </View>
-              <View style={Dashs.transactionDetails}>
-                <Text>Account Top-up</Text>
-                <View style={Dashs.transactionInfo}>
-                  <Text style={{color:'#04AD29', fontWeight:"500", fontSize:12,lineHeight:17.58}}>Received</Text>
-                  <Text style={{color:'#A4A9AE', fontWeight:"400", fontSize:12,lineHeight:17.58}}>Feb 25, 2022</Text>
+          {transactions.map((transaction) => (
+            <View key={transaction.id} style={Dashs.transactionItem}>
+              <View style={Dashs.transactionRow}>
+                <View
+                  style={[
+                    Dashs.transactionIcon,
+                    { backgroundColor: transaction.backgroundColor },
+                  ]}
+                >
+                  <Feather
+                    name={transaction.icon}
+                    size={24}
+                    color={transaction.iconColor}
+                  />
+                </View>
+                <View style={Dashs.transactionDetails}>
+                  <Text
+                    style={{
+                      fontFamily: "Poppins",
+                      fontWeight: "500",
+                      fontSize: 14,
+                      lineHeight: 20.51,
+                      color: "#23303B",
+                    }}
+                  >
+                    {transaction.type}
+                  </Text>
+                  <View style={Dashs.transactionInfo}>
+                    <Text
+                      style={{
+                        fontFamily: "Poppins",
+                        color: transaction.textColor,
+                        fontWeight: "500",
+                        fontSize: 12,
+                        lineHeight: 17.58,
+                      }}
+                    >
+                      {transaction.status}
+                    </Text>
+                    <Text
+                      style={{
+                        fontFamily: "Poppins",
+                        color: "#A4A9AE",
+                        fontWeight: "400",
+                        fontSize: 12,
+                        lineHeight: 17.58,
+                      }}
+                    >
+                      {transaction.date}
+                    </Text>
+                  </View>
                 </View>
               </View>
-              </View>
               <View>
-                <Text style={{fontWeight:"500", fontSize:15, lineHeight:29.3}}>$5.00 USD</Text>
+                <Text
+                  style={{
+                    fontWeight: "500",
+                    fontSize: 15,
+                    lineHeight: 29.3,
+                    fontFamily: "SofiaPro",
+                  }}
+                >
+                  {transaction.amount}
+                </Text>
               </View>
-            
-          </View>
-
-          {/* Additional Transactions */}
-          <View style={Dashs.transactionItem}>
-            <View style={Dashs.transactionRow}>
-              <View style={[Dashs.transactionIcon,{backgroundColor:"#fee0e0"}]}>
-              <Feather name="arrow-up-right" size={24} color="#F8332F" />              
-              </View>
-              <View style={Dashs.transactionDetails}>
-                <Text>Account Top-up</Text>
-                <View style={Dashs.transactionInfo}>
-                  <Text style={{color:'#04AD29', fontWeight:"500", fontSize:12,lineHeight:17.58}}>Received</Text>
-                  <Text style={{color:'#A4A9AE', fontWeight:"400", fontSize:12,lineHeight:17.58}}>Feb 25, 2022</Text>
-                </View>
-              </View>
-              </View>
-              <View>
-                <Text style={{fontWeight:"500", fontSize:15, lineHeight:29.3}}>$5.00 USD</Text>
-              </View>
-            
-          </View>
-          <View style={Dashs.transactionItem}>
-            <View style={Dashs.transactionRow}>
-              <View style={[Dashs.transactionIcon,{backgroundColor:"#fee0e0"}]}>
-              <Feather name="arrow-up-right" size={24} color="#F8332F" />              
-              </View>
-              <View style={Dashs.transactionDetails}>
-                <Text>Account Top-up</Text>
-                <View style={Dashs.transactionInfo}>
-                  <Text style={{color:'#04AD29', fontWeight:"500", fontSize:12,lineHeight:17.58}}>Received</Text>
-                  <Text style={{color:'#A4A9AE', fontWeight:"400", fontSize:12,lineHeight:17.58}}>Feb 25, 2022</Text>
-                </View>
-              </View>
-              </View>
-              <View>
-                <Text style={{fontWeight:"500", fontSize:15, lineHeight:29.3}}>$5.00 USD</Text>
-              </View>
-            
-          </View>
+            </View>
+          ))}
         </View>
 
       </View>
@@ -130,8 +176,7 @@ const styles = StyleSheet.create({
   scrollViewContainer: {
     flexGrow: 1, // Ensures that the content expands to fill the screen when necessary
     backgroundColor: '#f5f5f5', // You can customize the background color
-    paddingBottom: 20, // Optional: Adds padding at the bottom of the scroll view to prevent content from getting clipped
-  },
+   },
 });
 
 

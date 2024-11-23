@@ -63,9 +63,11 @@ const MobileTransferB = () => {
 
             {/* Search Bar */}
             <View style={styles.searchContainer}>
+                <TouchableOpacity>
                 <MaterialIcons name="search" size={24} color="#8E949A" />
+                </TouchableOpacity>
                 <TextInput
-                    style={styles.searchInput}
+                    style={[styles.searchInput,{ fontFamily: 'SofiaPro',}]}
                     placeholder="Search"
                     placeholderTextColor="#8E949A"
                     value={searchText}
@@ -107,7 +109,7 @@ const MobileTransferB = () => {
 
             {/* Make New Transfer Form */}
             <View style={styles.formContainer}>
-                <Text style={styles.formTitle}>Make New Transfer</Text>
+                <Text style={styles.formTitle}>Make new transfer</Text>
 
                 {/* Name Input */}
                 <TextInput
@@ -136,7 +138,7 @@ const MobileTransferB = () => {
                         keyboardType="numeric"
                         value={phoneNumber}
                         onChangeText={handlePhoneChange}
-                        placeholder="Phone number"
+                        placeholder="Reciever’s Mobile Number"
                     />
                 </View>
 
@@ -177,7 +179,7 @@ const MobileTransferB = () => {
             {buttonSpinner ? (
               <ActivityIndicator size="small" color={"white"} />
             ) : (
-              <Text style={SectionsLogin.loginButtonText}>Continue</Text>
+              <Text style={[SectionsLogin.loginButtonText,{ fontFamily: 'SofiaPro',fontWeight:"700"}]}>Continue</Text>
             )}
           </TouchableOpacity>
 
@@ -193,7 +195,12 @@ const styles = StyleSheet.create({
         padding: 20,
         backgroundColor: '#fff',
     },
-    sectionTitle: { fontSize: 19, fontWeight: '500', color: '#23303B', marginBottom: 10 },
+    sectionTitle: { 
+        fontFamily: 'Poppins',      
+        fontSize: 19,
+        lineHeight:19, fontWeight: '700',
+         color: '#23303B', marginBottom: 10 
+    },
     searchContainer: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -221,6 +228,7 @@ const styles = StyleSheet.create({
         marginLeft: 8,
     },
     phoneInput: {
+        fontFamily: 'SofiaPro',
         height: 55,
         borderRadius: 3,
         borderLeftWidth: 1,
@@ -230,6 +238,7 @@ const styles = StyleSheet.create({
         color: "#a1a1a1",
     },
     searchInput: {
+        fontFamily: 'SofiaPro',
         flex: 1,
         marginLeft: 10,
         fontSize: 16,
@@ -254,22 +263,26 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     beneficiaryName: {
+        fontFamily: 'SofiaPro',
         fontSize: 14,
         fontWeight: '600',
         color: '#333',
         textAlign: 'center',
     },
-    noBeneficiariesText: { fontSize: 16, color: '#8E949A', textAlign: 'center', marginTop: 20 },
+    noBeneficiariesText: {fontFamily: 'SofiaPro', fontSize: 16, color: '#8E949A', textAlign: 'center', marginTop: 20 },
     formContainer: {
         marginTop: 20,
     },
     formTitle: {
-        fontSize: 18,
-        fontWeight: '600',
-        color: '#333',
+        fontFamily: 'SofiaPro',
+        fontSize: 19,
+        lineHeight:19,
+        fontWeight: '700',
+        color: '#23303B',
         marginBottom: 15,
     },
     input: {
+        fontFamily: 'SofiaPro',
         height: 50,
         borderWidth: 1,
         borderColor: '#ccc',
