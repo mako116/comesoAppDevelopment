@@ -16,7 +16,8 @@ export default function RootLayout() {
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
     Poppins: require('../assets/fonts/Poppins-Regular.ttf'),
-    Sofia: require('../assets/fonts/Sofia Pro Regular Az.otf')
+    Sofia: require('../assets/fonts/Sofia Pro Regular Az.otf'),
+    Alata:require('../assets/fonts/Alata-Regular.ttf'),
   }); 
 
   useEffect(() => {
