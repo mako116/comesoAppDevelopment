@@ -200,7 +200,7 @@ import Confirmation1Modal from "../../components/Confirmation1Modal";
           openAddBeneficiary && <AddBeneficiaryModal toggleModal={toggleAddBenModal} openFirstConfirm={toggleFirstConfirmation}/>
         }
         {
-          openfirstConfirmation && <Confirmation1Modal toggleModal={toggleFirstConfirmation}/>
+          openfirstConfirmation && <Confirmation1Modal toggleModal={toggleFirstConfirmation} image={modalData.image}/>
         }
       </SafeAreaView>
     );
