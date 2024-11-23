@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import ConfirmTransfer from '../../../screens/TransferConfirm/Transferconfirm';
+import ConfirmBoard from '../../../screens/TransferConfirm/ConfirmBoard';
 
 const Confirmtransfers = () => {
     return (
-         <ConfirmTransfer/>
+         <ConfirmBoard/>
     );
 }
 

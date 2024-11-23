@@ -47,14 +47,14 @@ export default function SignUpScreen() {
       }}
     >
       <View>
-        <Text style={[SectionsLogin.welcomeText, { color: "#0A2EE2", lineHeight: 43.95, fontWeight: "400", fontSize: 30 }]}>
+        <Text style={[SectionsLogin.welcomeText, {fontFamily: 'SofiaPro', color: "#0A2EE2", lineHeight: 43.95, fontWeight: "400", fontSize: 30 }]}>
           Create Your Account
         </Text>
         <View style={SectionsLogin.inputContainer}>
           {/* Name */}
           <View>
             <TextInput
-              style={[SectionsLogin.input, { paddingHorizontal: 0 }]}
+              style={[SectionsLogin.input, {fontFamily: 'SofiaPro', paddingHorizontal: 0 }]}
               keyboardType="default"
               value={userInfo.Name}
               placeholder="Name"
@@ -65,7 +65,7 @@ export default function SignUpScreen() {
           {/* Email Input */}
           <View style={{ marginTop: 20 }}>
             <TextInput
-              style={[SectionsLogin.input, { paddingHorizontal: 0 }]}
+              style={[SectionsLogin.input, {fontFamily: 'SofiaPro', paddingHorizontal: 0 }]}
               keyboardType="email-address"
               value={userInfo.email}
               placeholder="email"
@@ -87,7 +87,7 @@ export default function SignUpScreen() {
               />
               <Text style={styles.callingCode}>+{callingCode}</Text>
               <TextInput
-                style={styles.phoneInput}
+                style={[styles.phoneInput,{fontFamily: 'SofiaPro',}]}
                 keyboardType="numeric"
                 value={phoneNumber}
                 onChangeText={handlePhoneChange}
@@ -100,7 +100,7 @@ export default function SignUpScreen() {
             {/* Password Input */}
             <View style={{ width: "80%" }}>
               <TextInput
-                style={SectionsLogin.input}
+                style={[SectionsLogin.input,{fontFamily: 'SofiaPro',}]}
                 secureTextEntry={!isPasswordVisible}
                 value={userInfo.password}
                 placeholder="password"
@@ -131,8 +131,8 @@ export default function SignUpScreen() {
             >
               {agreeTerms && <Text style={styles.checkmark}>✔</Text>}
             </TouchableOpacity>
-            <Text style={styles.checkboxLabel}>I agree with </Text>
-            <Text style={[styles.checkboxLabel, { color: "#0A2EE2" }]}>Terms & Conditions</Text>
+            <Text style={[styles.checkboxLabel,{fontFamily: 'SofiaPro',}]}>I agree with </Text>
+            <Text style={[styles.checkboxLabel, { fontFamily: 'SofiaPro',color: "#0A2EE2" }]}>Terms & Conditions</Text>
           </View>
 
           <View style={styles.checkboxContainer}>
@@ -141,10 +141,10 @@ export default function SignUpScreen() {
               style={[styles.checkbox, agreePrivacy && styles.checkboxSelected]}
               onPress={() => setAgreePrivacy(!agreePrivacy)}
             >
-              {agreePrivacy && <Text style={styles.checkmark}>✔</Text>}
+              {agreePrivacy && <Text style={[styles.checkmark,{fontFamily: 'SofiaPro',}]}>✔</Text>}
             </TouchableOpacity>
-            <Text style={styles.checkboxLabel}>I agree with the </Text>
-            <Text style={[styles.checkboxLabel, { color: "#0A2EE2" }]}> Privacy Policy</Text>
+            <Text style={[styles.checkboxLabel,{fontFamily: 'Alata',}]}>I agree with the </Text>
+            <Text style={[styles.checkboxLabel, {fontFamily: 'Alata', color: "#0A2EE2" }]}> Privacy Policy</Text>
           </View>
 
           {/* Login Button */}
@@ -155,19 +155,19 @@ export default function SignUpScreen() {
             {buttonSpinner ? (
               <ActivityIndicator size="small" color={"white"} />
             ) : (
-              <Text style={SectionsLogin.loginButtonText}>Login</Text>
+              <Text style={[SectionsLogin.loginButtonText,{fontFamily: 'SofiaPro',}]}>Login</Text>
             )}
           </TouchableOpacity>
 
           {/* Sign Up Redirect */}
           <View style={SectionsLogin.signupRedirect}>
-            <Text style={{ fontSize: 18, lineHeight: 26.37, fontWeight: "400", color: "#8E949A" }}>
+            <Text style={{fontFamily: 'SofiaPro', fontSize: 18, lineHeight: 26.37, fontWeight: "400", color: "#8E949A" }}>
               Already have an account?
             </Text>
             <TouchableOpacity
               onPress={() => router.push("/(routes)/login")}
             >
-              <Text style={SectionsLogin.signUpText}>Login</Text>
+              <Text style={[SectionsLogin.signUpText,{fontFamily: 'SofiaPro',}]}>Login</Text>
             </TouchableOpacity>
           </View>
         </View>

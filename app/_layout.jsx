@@ -16,8 +16,19 @@ export default function RootLayout() {
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
     Poppins: require('../assets/fonts/Poppins-Regular.ttf'),
+<<<<<<< HEAD
     Sofia: require('../assets/fonts/Sofia Pro Regular Az.otf'),
     Alata:require('../assets/fonts/Alata-Regular.ttf'),
+=======
+<<<<<<< HEAD
+    SofiaProMedium: require('../assets/fonts/sofia/Sofia Pro Medium Az.otf'), 
+    SofiaProBold: require('../assets/fonts/sofia/Sofia Pro Black Az.otf'), 
+    Alata: require('../assets/fonts/Alata/Alata-Regular.ttf'),
+    Sora: require('../assets/fonts/sora/Sora-Regular.ttf'),
+=======
+    Sofia: require('../assets/fonts/Sofia Pro Regular Az.otf')
+>>>>>>> 7037ebb2b5470381ad5a6d1ee655321f4a142f55
+>>>>>>> 86cb3a45dd68e7a7dc8df4d81518d923c2760d48
   }); 
 
   useEffect(() => {
@@ -42,6 +53,9 @@ export default function RootLayout() {
       }}
     />    
     {/* Add the Confirmation screen here */}
+    
+
+     <Stack.Screen name="(routes)/successfull-transfer/index"   />
     <Stack.Screen name="(routes)/TrfConfirm/index"   />
   </Stack>
     );

@@ -8,7 +8,7 @@ export default function HeaderM() {
     <View style={styles.container}>
       <View style={styles.row}>
       <TouchableOpacity onPress={()=> router.back()} style={styles.bellContainer}>
-      <MaterialIcons name="arrow-back-ios" size={24} color="black" />           
+      <MaterialIcons name="arrow-back-ios" size={14} color="#A4A9AE" />           
        </TouchableOpacity>
  
         <View style={styles.greetingContainer}>
@@ -16,7 +16,7 @@ export default function HeaderM() {
         </View>
 
         <View style={styles.bellContainer}>
-          <Fontisto name="bell" size={24} color="black" />
+          <Fontisto name="bell" size={20} color="#A4A9AE" />
           {/* Red notification dot for bell */}
           <View style={styles.notificationDot} />
         </View>
@@ -50,22 +50,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   greetingText: {
+     fontFamily: 'Sora',
     fontSize: 22,
-    fontWeight: '600',
-    lineHeight:27.72
+    fontWeight: '700',
+    lineHeight:27.72,
+    color:"#23303B"
   },
   bellContainer: {
-    padding:10,
+    padding:15,
     borderRadius:"50%",
     backgroundColor:"#A4A9AE40",
     position: 'relative', // To position the notification dot relative to the bell icon
   },
   notificationDot: {
     position: 'absolute',
-    top: -1,
-    right: -1,
-    width: 10,
-    height: 10,
+    top: 15,
+    right: 15,
+    width: 7,
+    height: 7,
     borderRadius: 5, // Circular dot
     backgroundColor: '#E73726',
   },

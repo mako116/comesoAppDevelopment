@@ -94,7 +94,7 @@ const Confirm = () => {
         </View>
 
         <TouchableOpacity style={styles.transferIcon}>
-          <Fontisto name="arrow-swap" size={26} color="black" />
+          <Fontisto name="arrow-swap" size={22} color="black" />
         </TouchableOpacity>
 
         {/* To Country */}
@@ -155,7 +155,7 @@ const Confirm = () => {
             {buttonSpinner ? (
               <ActivityIndicator size="small" color={"white"} />
             ) : (
-              <Text style={SectionsLogin.loginButtonText}>Continue</Text>
+              <Text style={[SectionsLogin.loginButtonText,{fontFamily: 'SofiaPro',fontWeight:"700"}]}>Continue</Text>
             )}
           </TouchableOpacity>
     </View>
@@ -191,12 +191,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   recipientHead: {
+    fontFamily: 'SofiaPro',
     fontSize: 19,
-    fontWeight: '600',
+    fontWeight: '700',
     lineHeight: 19,
     color: '#23303B',
   },
   recipientName: {
+    fontFamily: 'SofiaPro',
     fontSize: 20,
     lineHeight: 20,
     fontWeight: '600',
@@ -204,13 +206,13 @@ const styles = StyleSheet.create({
   },
   recipientPhone: {
     fontSize: 14,
+    fontFamily: 'SofiaPro',
     color: '#8E949A',
   },
   editIconContainer: {
     padding: 5,
     borderRadius: 50,
-    backgroundColor: '#F0F4F7',
-  },
+   },
   currencyContainer: {
     borderWidth: 1,
     borderColor: '#6E758812',
@@ -227,6 +229,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
   labelText: {
+    fontFamily: 'Alata',
     color: '#A4A9AE',
     fontSize: 16,
     fontWeight: '400',
@@ -238,6 +241,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   currencyText: {
+    fontFamily: 'Alata',
     fontSize: 14,
     marginTop: 5,
     color: '#23303B',
@@ -256,7 +260,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
    },
   transferDetailsHeader: {
-    fontSize: 18,
+    fontFamily: 'Alata',
+    fontSize: 19,
+    lineHeight:26.22,
     fontWeight: '600',
     marginBottom: 10,
     color: '#23303B',
@@ -267,17 +273,14 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     borderRadius:10,
     borderWidth: 1,
-    borderColor: '#D1D5DB',
+    borderColor: '#f1f2f3',
     padding: 10,
     backgroundColor: '#FFFFFF',
   },
   input: {
     flex: 1,
-   
     borderRadius: 8,
-   
     fontSize: 16,
-   
     marginRight: 10,
   },
   currencyLabel: {
