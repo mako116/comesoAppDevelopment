@@ -11,6 +11,9 @@ import {
   import { SafeAreaView } from "react-native-safe-area-context";
   import CustomHeader from "../../components/CustomHeader";
   import { AntDesign, EvilIcons } from "@expo/vector-icons";
+import BeneficiaryModal from "../../components/BeneficiaryModal";
+import AddBeneficiaryModal from "../../components/AddBeneficiaryModa";
+import Confirmation1Modal from "../../components/Confirmation1Modal";
   
   const Beneficiary = () => {
     const [beneficiaries, setBeneficiaries] = useState([
@@ -61,24 +64,35 @@ import {
       },
       // Add more as needed...
     ]);
+    const [modalData, setModalData] = useState({
+      image:''
+    });
+
+    const [openModal, setOpenModal] = useState(false);
+    const [openAddBeneficiary, setOpenAddBeneficiary] = useState(false);
+    const [openfirstConfirmation, setOpenFirstConfirmation] = useState(false);
+    const toggleModal = ()=>setOpenModal(!openModal);
+    const toggleAddBenModal = ()=>setOpenAddBeneficiary(!setOpenAddBeneficiary);
+    const toggleFirstConfirmation = ()=>setOpenFirstConfirmation(!openfirstConfirmation);
   
     return (
       <SafeAreaView style={{ flex: 1, paddingHorizontal: "5%" }}>
         <ScrollView contentContainerStyle={{ paddingBottom: 20 }}>
           <CustomHeader text="Beneficiary" />
-          <View style={{ marginTop: "5%" }}>
+          <View style={{ marginTop: "5%", }}>
             <View style={{ position: "absolute", top: "30%", left: "10%" }}>
               <EvilIcons name="search" size={24} color="gray" />
             </View>
             <TextInput
               style={{
-                backgroundColor: "rgba(164, 169, 174, 0.25)",
+                color: "rgba(164, 169, 174, 0.25)",
                 width: "90%",
                 height: 50,
                 paddingHorizontal: 50,
                 alignSelf: "center",
                 borderRadius: 10,
                 fontSize: 18,
+                backgroundColor:'rgba(164, 169, 174, 0.25)'
               }}
               placeholder="search"
             />
@@ -89,14 +103,14 @@ import {
                 fontSize: 19,
                 fontWeight: "bold",
                 marginBottom: 20,
-                marginLeft: "2%",
+                marginLeft: "5%",
               }}
             >
               Beneficiaries
             </Text>
-            <View style={{ flexDirection: "row", flexWrap: "wrap", gap: "3%" }}>
+            <View style={{ flexDirection: "row", flexWrap: "wrap", gap: "3%", marginHorizontal:"2%" }}>
               {beneficiaries.map((item, index) => (
-                <View
+                <TouchableOpacity
                   key={index}
                   style={{
                     width: "30%",
@@ -110,6 +124,12 @@ import {
                     borderRadius: 10,
                     padding: 10,
                     alignItems: "center",
+                  }}
+                  onPress={()=>{
+                    setModalData({
+                      image:item.avatar
+                    })
+                    setOpenModal(true);
                   }}
                 >
                   <Image
@@ -140,7 +160,7 @@ import {
                   >
                     {item.phone}
                   </Text>
-                </View>
+                </TouchableOpacity>
               ))}
             </View>
           </View>
@@ -157,6 +177,7 @@ import {
               marginBottom:20
               
             }}
+            onPress={()=>setOpenAddBeneficiary(true)}
           >
             
               <AntDesign name="pluscircleo" size={24} color="white" style={{position:'absolute', top:'27%', left:'18%'}} />
@@ -172,6 +193,15 @@ import {
            
           </TouchableOpacity>
         </ScrollView>
+        {
+          openModal && <BeneficiaryModal toggleModal={toggleModal} image={modalData.image}/>
+        }
+        {
+          openAddBeneficiary && <AddBeneficiaryModal toggleModal={toggleAddBenModal} openFirstConfirm={toggleFirstConfirmation}/>
+        }
+        {
+          openfirstConfirmation && <Confirmation1Modal toggleModal={toggleFirstConfirmation}/>
+        }
       </SafeAreaView>
     );
   };
