@@ -11,7 +11,7 @@ import CustomHeader from "./CustomHeader";
 import { AntDesign, Feather } from "@expo/vector-icons";
 import CustomBlueButton from "./CustomBlueButton";
 
-const Confirmation1Modal = ({ toggleModal, image }) => {
+const Confirmation1Modal = ({ toggleModal, image, openSecondConfirm }) => {
   return (
     <>
       <View
@@ -136,6 +136,11 @@ const Confirmation1Modal = ({ toggleModal, image }) => {
         borderRadius: 10,
         marginTop: "35%",
         marginBottom: 20,
+      }}
+
+      onPress={()=>{
+        toggleModal();
+        openSecondConfirm();
       }}
       
     >

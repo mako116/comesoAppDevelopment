@@ -3,6 +3,7 @@ import React from "react";
 import { View, Text, TouchableOpacity, Image, ImageBackground, ScrollView, StyleSheet } from "react-native";
 import Dashs from "../../styles/Dashboard/Dashboard.styles";
 import Header from "../../screens/Dashboard/Header";
+import { router } from "expo-router";
 
 const DashboardScreen = () => {
   const transactions = [
@@ -73,7 +74,7 @@ const DashboardScreen = () => {
             </View>
 
             <View style={Dashs.actionBoxContainer}>
-              <TouchableOpacity style={[Dashs.actionBox, {backgroundColor:"#A4A9AE26"}]}>
+              <TouchableOpacity onPress={()=>router.push('/(routes)/add-money')} style={[Dashs.actionBox, {backgroundColor:"#A4A9AE26"}]}>
                 <Ionicons name="add-circle-outline" size={20} color="#0A2EE2BF" />
               </TouchableOpacity>
               <Text style={Dashs.actionBoxText}>Add Money</Text>

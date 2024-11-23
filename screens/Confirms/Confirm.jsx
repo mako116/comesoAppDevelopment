@@ -9,7 +9,7 @@ import { router } from 'expo-router';
 
 const Confirm = () => {
     const handleContinue = () => {
-        router.push("/(routes)/confirm-transfer/confirmtransfers")
+        router.push("/(routes)/confirm-transfer")
      };
 
   const [fromCountry, setFromCountry] = useState({

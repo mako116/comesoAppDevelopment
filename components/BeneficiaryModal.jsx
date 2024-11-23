@@ -168,7 +168,7 @@ const BeneficiaryModal = ({ toggleModal, image }) => {
             </View>
           </View>
         </View>
-        <CustomBlueButton text='Edit Beneficiary'/>
+        <CustomBlueButton text='Edit Beneficiary' toggleModal={toggleModal} onPress={()=>{}}/>
       </View>
     </>
   );

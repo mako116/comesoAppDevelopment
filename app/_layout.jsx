@@ -24,7 +24,7 @@ export default function RootLayout() {
     SofiaProBold: require('../assets/fonts/sofia/Sofia Pro Black Az.otf'), 
     Alata: require('../assets/fonts/Alata/Alata-Regular.ttf'),
     Sora: require('../assets/fonts/sora/Sora-Regular.ttf'),
-    Sofia: require('../assets/fonts/Sofia Pro Regular Az.otf')
+    Sofia: require('../assets/fonts/sofia/Sofia Pro Regular Az.otf')
   }); 
 
   useEffect(() => {
