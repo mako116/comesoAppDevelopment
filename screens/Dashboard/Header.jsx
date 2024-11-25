@@ -1,8 +1,11 @@
 import { View, Text, Image, StyleSheet } from 'react-native';
-import React from 'react';
-import { Fontisto } from '@expo/vector-icons';
+import React, { useContext } from 'react';
+import { AntDesign, Fontisto } from '@expo/vector-icons';
+import { AuthContext } from '@/context/AuthContext';
 
 const Header = ()=> {
+  const {userDetails} = useContext(AuthContext);
+  const user = JSON.parse(userDetails);
   return (
     <View style={styles.container}>
       <View style={styles.row}>
@@ -11,12 +14,13 @@ const Header = ()=> {
             source={require('../../assets/images/profile.png')} 
             style={styles.profileImage}
           />
+          {/* <AntDesign name="user" size={40} color="black" /> */}
           {/* Red notification dot for profile */}
           <View style={styles.notificationDot} />
         </View>
 
         <View style={styles.greetingContainer}>
-          <Text style={styles.greetingText}>Hi, there</Text>
+          <Text style={styles.greetingText}>Hi, {user.name.split(' ')[1]}</Text>
         </View>
 
         <View style={styles.bellContainer}>

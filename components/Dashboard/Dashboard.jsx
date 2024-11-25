@@ -1,11 +1,14 @@
  import { Feather, FontAwesome5, Ionicons } from "@expo/vector-icons";
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text, TouchableOpacity, Image, ImageBackground, ScrollView, StyleSheet } from "react-native";
 import Dashs from "../../styles/Dashboard/Dashboard.styles";
 import Header from "../../screens/Dashboard/Header";
 import { router } from "expo-router";
+import { AuthContext } from "@/context/AuthContext";
 
 const DashboardScreen = () => {
+  const {userDetails} = useContext(AuthContext);
+  const user = JSON.parse(userDetails);
   const transactions = [
     {
       id: 1,
@@ -57,7 +60,7 @@ const DashboardScreen = () => {
               <Text style={Dashs.balanceAmount}>$4,228.76</Text>
 
               <Text style={Dashs.holderText}>Holder</Text>
-              <Text style={Dashs.holderName}>Will Jonas - 09123456789</Text>
+              <Text style={Dashs.holderName}>{user.name} - {user.phone}</Text>
             </View>
           </ImageBackground>
         </View>

@@ -1,39 +1,39 @@
 import { Entypo, FontAwesome, Fontisto, Ionicons, SimpleLineIcons } from "@expo/vector-icons";
 import { useState } from "react";
-import { ActivityIndicator, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, Alert, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { router } from "expo-router";
 import SectionsLogin from "@/styles/Login/Login.styles";
+import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function LoginScreen() {
   const [isPasswordVisible, setPasswordVisible] = useState(false);
   const [buttonSpinner, setButtonSpinner] = useState(false);
-  const [userInfo, setUserInfo] = useState({
-    email: "",
-    password: "",
-  });
-  const [required, setRequired] = useState("");
-  const [error, setError] = useState({
-    password: "",
-  });
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState("");
+  const baseUrl = process.env.EXPO_PUBLIC_BASE_URL;
 
-  const handleSignIn = () => {
+  const handleSignIn = async () => {
+    if(!email || !password){
+      return Alert.alert('All fields are required', 'Please fill in all the fields to continue')
+    }
     setButtonSpinner(true);
-    setTimeout(() => {
-      if (!userInfo.email || !userInfo.password) {
-        setRequired("Email and password are required.");
-        setButtonSpinner(false);
-      } else if (userInfo.password.length < 6) {
-        setError({ password: "Password must be at least 6 characters long." });
-        setButtonSpinner(false);
-      } else {
-        setRequired("");
-        setError({ password: "" });
-        setButtonSpinner(false);
-        // Replace with API call or navigation logic
-        router.push("(tabs)/home");
-        alert("Logged in successfully!");
+
+    try {
+      const response = await axios.post(`${baseUrl}/api/login`, {email, password});
+      
+      if(response.data.status){
+       
+        await AsyncStorage.setItem('authToken', response.data.token);
+      
+        router.push('/(tabs)/home');
       }
-    }, 2000);
+    } catch (error) {
+      setButtonSpinner(false);
+       Alert.alert('Invalid credentials', 'Please provide the correct credentials to login');
+      
+    }
+   
   };
 
   return (
@@ -57,10 +57,10 @@ export default function LoginScreen() {
           <TextInput
             style={[SectionsLogin.input, {fontFamily: 'SofiaPro', paddingHorizontal: 0 }]}
             keyboardType="email-address"
-            value={userInfo.email}
-            placeholder="user Id"
+            value={email}
+            placeholder="email"
             onChangeText={(value) =>
-              setUserInfo({ ...userInfo, email: value })
+              setEmail(value)
             }
           />
            
@@ -71,10 +71,10 @@ export default function LoginScreen() {
           <TextInput
             style={[SectionsLogin.input,{fontFamily: 'SofiaPro',}]}
             secureTextEntry={!isPasswordVisible}
-            value={userInfo.password}
+            value={password}
             placeholder="password"
             onChangeText={(value) =>
-              setUserInfo({ ...userInfo, password: value })
+              setPassword(value)
             }
           />
           <TouchableOpacity

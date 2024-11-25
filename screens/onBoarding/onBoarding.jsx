@@ -1,13 +1,22 @@
 import { View, Text, StyleSheet, Image, StatusBar } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { router } from 'expo-router';
+import { AuthContext } from '@/context/AuthContext';
  
 const  OnBoardingScreen =()=> {
+      const { userDetails} = useContext(AuthContext);
+     
       
     useEffect(()=>{
         setTimeout(() => {
             // router.push("/(tabs)/home")
-            router.push("/(tabs)/home")
+            if(userDetails){
+              
+              router.push('/(tabs)/home');
+            }else{
+              router.push("/(routes)/login")
+            }
+            
          }, 2000);
     },[])
 
