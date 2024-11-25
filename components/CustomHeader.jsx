@@ -65,7 +65,8 @@ const styles = StyleSheet.create({
   greetingText: {
     fontSize: 22,
     fontWeight: '600',
-    lineHeight:27.72
+    lineHeight:27.72,
+    fontFamily:'Sora'
   },
   bellContainer: {
     position: 'relative', // To position the notification dot relative to the bell icon
