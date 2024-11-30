@@ -19,52 +19,13 @@ import axiosClient from "../../axiosClient";
 
 const Beneficiary = () => {
   const [beneficiaries, setBeneficiaries] = useState([
-    {
-      name: "Will Hopper",
-      phone: "0904455588",
-      avatar: require("../../assets/images/will.png"),
-    },
-    {
-      name: "Jonathan",
-      phone: "0909948485",
-      avatar: require("../../assets/images/jonathan.png"),
-    },
-    {
-      name: "Dr Kamal",
-      phone: "0909948485",
-      avatar: require("../../assets/images/kamal.png"),
-    },
-    {
-      name: "Will Hopper",
-      phone: "0904455588",
-      avatar: require("../../assets/images/will.png"),
-    },
-    {
-      name: "Jonathan",
-      phone: "0909948485",
-      avatar: require("../../assets/images/jonathan.png"),
-    },
-    {
-      name: "Dr Kamal",
-      phone: "0909948485",
-      avatar: require("../../assets/images/kamal.png"),
-    },
-    {
-      name: "Will Hopper",
-      phone: "0904455588",
-      avatar: require("../../assets/images/will.png"),
-    },
-    {
-      name: "Jonathan",
-      phone: "0909948485",
-      avatar: require("../../assets/images/jonathan.png"),
-    },
-    {
-      name: "Dr Kamal",
-      phone: "0909948485",
-      avatar: require("../../assets/images/kamal.png"),
-    },
-    // Add more as needed...
+   
+    // {
+    //   name: "Dr Kamal",
+    //   phone: "0909948485",
+    //   avatar: require("../../assets/images/kamal.png"),
+    // },
+
   ]);
   const [first_name, setFirstName] = useState('');
   const [last_name, setLastName] = useState("")

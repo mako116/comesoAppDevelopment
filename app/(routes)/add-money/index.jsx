@@ -1,13 +1,43 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
-import React from "react";
+import { View, Text, Image, TouchableOpacity, TextInput } from "react-native";
+import React, { useContext, useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Paystack, paystackProps } from "react-native-paystack-webview";
+
 import CustomHeader from "../../../components/CustomHeader";
 import { Feather } from "@expo/vector-icons";
+import { AuthContext } from "@/context/AuthContext";
+import axiosClient from "../../../axiosClient";
+import { router } from "expo-router";
 
 const AddMoney = () => {
+  const { userDetails, setUserDetails } = useContext(AuthContext);
+  const paystackWebViewRef = useRef(paystackProps.PayStackRef);
+  const [amount, setAmount] = useState(0);
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <CustomHeader text="Add Money" />
+      <Paystack
+        paystackKey={process.env.EXPO_PUBLIC_PAYSTACK_TEST_PUBLIC}
+        billingEmail={userDetails.email}
+        amount={amount}
+        billingName={userDetails.name}
+        currency="GHS"
+        onCancel={(e) => {
+          // handle response here
+        }}
+        onSuccess={(res) => {
+          // handle response here
+           axiosClient.post('/user/top-up', {amount}).then(res=>{
+            setUserDetails(prev=>({
+              ...prev,
+              balance: prev.balance + amount
+            }))
+            router.push('/(tabs)/home');
+          }).catch(e=>console.log(e));
+        }}
+        ref={paystackWebViewRef}
+      />
+
       <View
         style={{
           marginTop: "10%",
@@ -52,7 +82,9 @@ const AddMoney = () => {
         <View
           style={{ marginVertical: "5%", paddingHorizontal: "5%", gap: "5%" }}
         >
-          <Text style={{ fontSize: 36, fontWeight: "500" }}>8123456789</Text>
+          <Text style={{ fontSize: 36, fontWeight: "500" }}>
+            ${userDetails.balance}
+          </Text>
           <View style={{ flexDirection: "row", gap: "8%", marginTop: "5%" }}>
             <TouchableOpacity
               style={{
@@ -111,27 +143,52 @@ const AddMoney = () => {
 
       <View style={{ paddingHorizontal: "5%", marginTop: "10%" }}>
         <Text style={{ fontFamily: "Alata", fontWeight: "400", fontSize: 19 }}>
-          Select Bank
+          Top up with Paystack
         </Text>
       </View>
-      <View style={{ marginTop: "5%", paddingHorizontal: "5%", flexDirection:'row', gap:'3%' }}>
-        <View
+      <View
+        style={{
+          backgroundColor: "rgba(164, 169, 174, 0.2)",
+          width: "90%",
+          marginHorizontal: "auto",
+          marginTop: 20,
+          borderRadius: 10,
+          paddingVertical: 5,
+        }}
+      >
+        <TextInput
+          placeholder="Amount"
+          keyboardType="numeric"
+          style={{ paddingLeft: 10 }}
+          onChangeText={(val) => setAmount(val)}
+        />
+      </View>
+      <View
+        style={{
+          marginTop: "5%",
+          paddingHorizontal: "5%",
+          flexDirection: "row",
+          gap: "3%",
+        }}
+      >
+        <TouchableOpacity
           style={{
             backgroundColor: "white",
-            width: "30%",
+            width: "100%",
             height: 103.4,
             borderRadius: 10,
-            justifyContent:'center'
+            justifyContent: "center",
           }}
+          onPress={() => paystackWebViewRef.current.startTransaction()}
         >
           <Image
             resizeMode="contain"
-            source={require("../../../assets/images/att.png")}
+            source={require("../../../assets/images/paystacklogo.png")}
             style={{ width: "70%", marginHorizontal: "auto" }}
           />
-          <Text style={{fontSize:13,fontFamily:'Sofia', color:'rgba(142, 148, 154, 1)', textAlign:'center', marginTop:1}}>AT&T</Text>
-        </View>
-        <View
+          {/* <Text style={{fontSize:13,fontFamily:'Sofia', color:'rgba(142, 148, 154, 1)', textAlign:'center', marginTop:1}}>AT&T</Text> */}
+        </TouchableOpacity>
+        {/* <View
           style={{
             backgroundColor: "white",
             width: "30%",
@@ -178,14 +235,13 @@ const AddMoney = () => {
             style={{ width: "70%", marginHorizontal: "auto" }}
           />
           <Text style={{fontSize:13,fontFamily:'Sofia', color:'rgba(142, 148, 154, 1)', textAlign:'center', marginTop:1}}>AT&T</Text>
-        </View>
-        
+        </View> */}
       </View>
-      <View style={{marginTop:12, paddingHorizontal:"5%"}}>
+      {/* <View style={{marginTop:12, paddingHorizontal:"5%"}}>
         
         <Text style={{fontSize:14,fontWeight:300,color:'rgba(51, 51, 51, 0.7)'}}>Selecting any of the provided banks automatically opens the app for you to transfer money into your wallet.</Text>
         
-      </View>
+      </View> */}
     </SafeAreaView>
   );
 };
