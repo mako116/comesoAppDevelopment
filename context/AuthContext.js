@@ -7,12 +7,12 @@ export const AuthContext = createContext(null);
 export const AuthProvider = ({children})=>{
     const [userDetails, setUserDetails] = useState(null);
     const [authToken, setAuthToken] = useState("");
-   AsyncStorage.getItem('userDetails').then(details=>setUserDetails(details));
+   
    AsyncStorage.getItem('authToken').then(token=>setAuthToken(token));
   
 
    return (
-    <AuthContext.Provider value={{userDetails, authToken}}>
+    <AuthContext.Provider value={{userDetails, authToken, setUserDetails}}>
         {children}
     </AuthContext.Provider>
    )

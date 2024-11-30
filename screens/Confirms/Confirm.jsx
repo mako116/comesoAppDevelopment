@@ -1,16 +1,28 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image, TextInput, ActivityIndicator } from 'react-native';
+import React, { useContext, useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Image, TextInput, ActivityIndicator, Alert } from 'react-native';
 import { MaterialIcons, Fontisto } from '@expo/vector-icons';
 import CountryPicker from 'react-native-country-picker-modal';
 import logo from '../../assets/images/logo.png';
 import HeaderM from '../MobileTransfer/HeaderM';
 import SectionsLogin from "@/styles/Login/Login.styles";
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
+import {AuthContext} from '@/context/AuthContext'
 
 const Confirm = () => {
+  const {name, phone} = useLocalSearchParams();
+  const {userDetails} = useContext(AuthContext)
+  
     const handleContinue = () => {
-        router.push("/(routes)/confirm-transfer")
+      if(fromAmount > userDetails.balance){
+        return Alert.alert('Insufficient funds', 'You do not have sufficient vouchers to send');
+      }
+        router.push({
+          pathname:"/(routes)/confirm-transfer",
+          params:{amount: fromAmount, name, phone}
+        })
      };
+    
+    
 
   const [fromCountry, setFromCountry] = useState({
     countryCode: 'US',
@@ -51,6 +63,14 @@ const Confirm = () => {
     }
   };
 
+  const handleConvert = async ()=>{
+    const value = axios.get(`https://api.exchangeratesapi.io/v1/convert
+    ? access_key = ${process.env.EXPO_PUBLIC_CURRENCY_EXCHANGE_API_KEY}
+    & from = ${fromCountry.currency}
+    & to = ${toCountry.currency}
+    & amount = ${parseInt(fromAmount, 10)}`)
+  }
+
   return (
     <View style={styles.container}>
       <HeaderM />
@@ -62,8 +82,8 @@ const Confirm = () => {
         <View style={styles.recipientTextContainer}>
           <Image source={logo} style={styles.beneficiaryImage} />
           <View>
-            <Text style={styles.recipientName}>John Doe</Text>
-            <Text style={styles.recipientPhone}>1******6103</Text>
+            <Text style={styles.recipientName}>{name}</Text>
+            <Text style={styles.recipientPhone}>{phone}</Text>
           </View>
         </View>
         <TouchableOpacity style={styles.editIconContainer}>
@@ -93,7 +113,7 @@ const Confirm = () => {
           <Text style={styles.currencyText}>{fromCountry.currency}</Text>
         </View>
 
-        <TouchableOpacity style={styles.transferIcon}>
+        <TouchableOpacity style={styles.transferIcon} onPress={handleConvert}>
           <Fontisto name="arrow-swap" size={22} color="black" />
         </TouchableOpacity>
 

@@ -1,12 +1,13 @@
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import React from 'react';
+import { router } from 'expo-router';
 
 
 const CustomHeader = ({text})=> {
   return (
     <View style={styles.container}>
       <View style={styles.row}>
-        <View style={styles.profileContainer}>
+        <TouchableOpacity onPress={()=>router.back()} style={styles.profileContainer}>
           <Image 
             source={require('../assets/images/headerback.png')} 
             width={30}
@@ -16,7 +17,7 @@ const CustomHeader = ({text})=> {
           />
           
           
-        </View>
+        </TouchableOpacity>
 
         <View style={styles.greetingContainer}>
           <Text style={styles.greetingText}>{text}</Text>

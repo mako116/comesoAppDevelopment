@@ -1,17 +1,20 @@
 import { Entypo, FontAwesome, Fontisto, Ionicons, SimpleLineIcons } from "@expo/vector-icons";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { ActivityIndicator, Alert, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { router } from "expo-router";
 import SectionsLogin from "@/styles/Login/Login.styles";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AuthContext } from "@/context/AuthContext";
 
 export default function LoginScreen() {
   const [isPasswordVisible, setPasswordVisible] = useState(false);
   const [buttonSpinner, setButtonSpinner] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState("");
+  const {setUserDetails, userDetails} = useContext(AuthContext)
   const baseUrl = process.env.EXPO_PUBLIC_BASE_URL;
+  
 
   const handleSignIn = async () => {
     if(!email || !password){
@@ -24,7 +27,15 @@ export default function LoginScreen() {
       
       if(response.data.status){
        
+      
+        await AsyncStorage.clear();
         await AsyncStorage.setItem('authToken', response.data.token);
+
+      
+        // await AsyncStorage.setItem('userDetails', JSON.stringify(response.data.user));
+        setUserDetails(response.data.user);
+
+        
       
         router.push('/(tabs)/home');
       }
@@ -33,7 +44,7 @@ export default function LoginScreen() {
        Alert.alert('Invalid credentials', 'Please provide the correct credentials to login');
       
     }
-   
+  
   };
 
   return (

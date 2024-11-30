@@ -1,15 +1,40 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import React, { useContext, useState } from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
  import logo from '../../assets/images/logo.png';
 import SectionsLogin from "@/styles/Login/Login.styles";
 import HeaderM from './HeaderM';
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
+import axiosClient from '../../axiosClient';
+import {AuthContext} from '@/context/AuthContext'
 
 const ConfirmTransfer = () => {
   const [buttonSpinner, setButtonSpinner] = useState(false);
+  const {amount, name, phone} = useLocalSearchParams();
+  const {userDetails, setUserDetails} = useContext(AuthContext)
 
-  const handleContinue = () => {
-    router.push("/(routes)/successfull-transfer")
+
+  const handleContinue = async() => {
+    try {
+      const res = await axiosClient.post('/user/transfer-voucher', {
+        receiver:name, amount
+      })
+      if(res.data.status){
+        
+       
+        setUserDetails(prev=>({
+          ...prev,
+          balance: prev.balance - amount
+        }));
+        
+      router.push("/(routes)/successfull-transfer")
+      }
+    } catch (error) {
+      router.push('/(routes)/failed');
+      Alert.alert('Error', 'An error occured during transfer')
+    }
+    
+
+    
  };
   return ( 
     <View style={styles.container}>
@@ -28,15 +53,15 @@ const ConfirmTransfer = () => {
 
         
         <View style={styles.textContainer}>
-          <Text style={styles.boxTexts}>John Doe</Text>
-          <Text style={styles.boxText}>1******6103</Text>
+          <Text style={styles.boxTexts}>{name}</Text>
+          <Text style={styles.boxText}>{phone}</Text>
           <View style={styles.boxBoard}>
           <Text style={styles.boxTex}>Transactions Status:</Text>
           <Text style={[styles.boxTex, {fontWeight:"700"}]}> Pending</Text>
           </View>
         
          <View style={{flexDirection:'row', alignItems:"center",justifyContent:"center",paddingVertical:10}}>
-         <Text style={styles.currencyText}>$250.00</Text>
+         <Text style={styles.currencyText}>${amount}.00</Text>
          <Text style={styles.currency}>USD</Text>
          </View>
          <View style={{flexDirection:'row',gap:15,alignItems:"center",justifyContent:"center"}}>

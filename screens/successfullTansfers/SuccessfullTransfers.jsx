@@ -34,7 +34,7 @@ const SuccessfullTransfers = () => {
 
       <View>
         <TouchableOpacity
-          onPress={handleContinue}
+          // onPress={handleContinue}
           style={[SectionsLogin.loginButtons]}
           disabled={buttonSpinner}
         >
@@ -47,6 +47,7 @@ const SuccessfullTransfers = () => {
           )}
         </TouchableOpacity>
       </View>
+      
     </View>
   );
 };

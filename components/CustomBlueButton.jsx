@@ -17,7 +17,7 @@ const CustomBlueButton = ({ text, onPress, toggleModal }) => {
         marginBottom: 20,
       }}
       onPress={() => {
-        toggleModal();
+        // toggleModal();
         onPress();
       }}
     >

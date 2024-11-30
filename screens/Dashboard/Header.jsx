@@ -5,7 +5,7 @@ import { AuthContext } from '@/context/AuthContext';
 
 const Header = ()=> {
   const {userDetails} = useContext(AuthContext);
-  const user = JSON.parse(userDetails);
+  const user = userDetails;
   return (
     <View style={styles.container}>
       <View style={styles.row}>
@@ -20,7 +20,7 @@ const Header = ()=> {
         </View>
 
         <View style={styles.greetingContainer}>
-          <Text style={styles.greetingText}>Hi, {user.name.split(' ')[1]}</Text>
+          <Text style={styles.greetingText}>Hi, {user.name.split(' ')[0]}</Text>
         </View>
 
         <View style={styles.bellContainer}>

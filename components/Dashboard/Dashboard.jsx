@@ -1,49 +1,94 @@
  import { Feather, FontAwesome5, Ionicons } from "@expo/vector-icons";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, Image, ImageBackground, ScrollView, StyleSheet } from "react-native";
 import Dashs from "../../styles/Dashboard/Dashboard.styles";
 import Header from "../../screens/Dashboard/Header";
 import { router } from "expo-router";
 import { AuthContext } from "@/context/AuthContext";
+import axiosClient from '../../axiosClient';
 
 const DashboardScreen = () => {
-  const {userDetails} = useContext(AuthContext);
-  const user = JSON.parse(userDetails);
-  const transactions = [
-    {
-      id: 1,
-      type: "Account Top-up",
-      status: "Received",
-      date: "Feb 25, 2022",
-      amount: "$5.00 USD",
-      icon: "arrow-down-left",
-      iconColor: "#04AD29",
-      backgroundColor: "#E0F7EC",
-      textColor: "#04AD29",
-    },
-    {
-      id: 2,
-      type: "Transfer Out",
-      status: "Sent",
-      date: "Feb 26, 2022",
-      amount: "$10.00 USD",
-      icon: "arrow-up-right",
-      iconColor: "#F8332F",
-      backgroundColor: "#FEE0E0",
-      textColor: "#F8332F",
-    },
-    {
-      id: 3,
-      type: "Purchase",
-      status: "Completed",
-      date: "Feb 27, 2022",
-      amount: "$20.00 USD",
-      icon: "arrow-up-right",
-      iconColor: "#F8332F",
-      backgroundColor: "#FEE0E0",
-      textColor: "#F8332F",
-    },
-  ];
+  const [user, setUser] = useState(null);
+   const [transactions, setTransactions] = useState([]);
+
+  const date = transactions?.map(item=>{
+    const date = new Date(item.created_at); // Example date
+
+    const formattedDate = new Intl.DateTimeFormat('en-US', {
+      month: 'long',  // Full month name
+      day: 'numeric', // Day of the month
+      year: 'numeric' // Year
+    }).format(date);
+    
+    return formattedDate;
+   })
+
+   
+   
+  
+  
+
+  useEffect(()=>{
+    const getUser = async ()=>{
+      try {
+        
+        const response = await axiosClient.get('/user');
+        setUser(response.data.user);
+        setTransactions(response.data.transactions);
+       
+        
+      } catch (error) {
+        console.log(error)
+      }
+      
+    }
+
+    getUser();
+  }, [])
+ 
+  // const transactions = [
+  //   {
+  //     id: 1,
+  //     type: "Account Top-up",
+  //     status: "Received",
+  //     date: "Feb 25, 2022",
+  //     amount: "$5.00 USD",
+  //     icon: "arrow-down-left",
+  //     iconColor: "#04AD29",
+  //     backgroundColor: "#E0F7EC",
+  //     textColor: "#04AD29",
+  //   },
+  //   {
+  //     id: 2,
+  //     type: "Transfer Out",
+  //     status: "Sent",
+  //     date: "Feb 26, 2022",
+  //     amount: "$10.00 USD",
+  //     icon: "arrow-up-right",
+  //     iconColor: "#F8332F",
+  //     backgroundColor: "#FEE0E0",
+  //     textColor: "#F8332F",
+  //   },
+  //   {
+  //     id: 3,
+  //     type: "Purchase",
+  //     status: "Completed",
+  //     date: "Feb 27, 2022",
+  //     amount: "$20.00 USD",
+  //     icon: "arrow-up-right",
+  //     iconColor: "#F8332F",
+  //     backgroundColor: "#FEE0E0",
+  //     textColor: "#F8332F",
+  //   },
+  // ];
+
+  
+
+if(!user){
+  return null;
+}
+
+
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContainer}>
       <Header/>
@@ -57,10 +102,10 @@ const DashboardScreen = () => {
           >
             <View style={Dashs.boardContent}>
               <Text style={Dashs.balanceText}>Available Balance</Text>
-              <Text style={Dashs.balanceAmount}>$4,228.76</Text>
+              <Text style={Dashs.balanceAmount}>${user?.balance}</Text>
 
               <Text style={Dashs.holderText}>Holder</Text>
-              <Text style={Dashs.holderName}>{user.name} - {user.phone}</Text>
+              <Text style={Dashs.holderName}>{user?.name} - {user?.phone}</Text>
             </View>
           </ImageBackground>
         </View>
@@ -70,7 +115,7 @@ const DashboardScreen = () => {
           <Text style={Dashs.sectionTitle}>Quick Actions</Text>
           <View style={Dashs.actionBoxesContainer}>
             <View style={Dashs.actionBoxContainer}>
-              <TouchableOpacity onPress={()=>router.push('/(routes)/transaction')} style={[Dashs.actionBox, {backgroundColor:"#0A2EE2"}]}>
+              <TouchableOpacity onPress={()=>router.push('/(tabs)/send')} style={[Dashs.actionBox, {backgroundColor:"#0A2EE2"}]}>
                 <Image source={require('../../assets/images/sendmoni.png')} style={Dashs.icon} />
               </TouchableOpacity>
               <Text style={Dashs.actionBoxText}>Send Money</Text>
@@ -84,9 +129,9 @@ const DashboardScreen = () => {
             </View>
 
             <View style={Dashs.actionBoxContainer}>
-              <TouchableOpacity style={[Dashs.actionBox, {backgroundColor:"#A4A9AE26"}]}>
+              <TouchableOpacity style={[Dashs.actionBox, {backgroundColor:"#A4A9AE26"}]} onPress={()=>router.push('beneficiary')}>
                 <FontAwesome5 name="user-circle" size={20} color="#0A2EE2BF" />
-              </TouchableOpacity>
+              </TouchableOpacity> 
               <Text style={Dashs.actionBoxText}>Beneficiaries</Text>
             </View>
           </View>
@@ -101,19 +146,19 @@ const DashboardScreen = () => {
             </TouchableOpacity>
           </View>
 
-          {transactions.map((transaction) => (
+          {transactions.map((transaction, index) => (
             <View key={transaction.id} style={Dashs.transactionItem}>
               <View style={Dashs.transactionRow}>
                 <View
                   style={[
                     Dashs.transactionIcon,
-                    { backgroundColor: transaction.backgroundColor },
+                    { backgroundColor: transaction.status=='Received' &&'#E0F7EC'|| transaction.status=='Sent' &&'#FEE0E0' },
                   ]}
                 >
                   <Feather
-                    name={transaction.icon}
+                    name={transaction.status =='Received'&& "arrow-down-left"|| transaction.status=='Sent'&&'arrow-up-right' }
                     size={24}
-                    color={transaction.iconColor}
+                    color={transaction.status=='Received' && '#04AD29' || transaction.status =='Sent' && '#F8332F'}
                   />
                 </View>
                 <View style={Dashs.transactionDetails}>
@@ -132,10 +177,11 @@ const DashboardScreen = () => {
                     <Text
                       style={{
                         fontFamily: "Poppins",
-                        color: transaction.textColor,
+                        color: transaction.status=='Received'&& '#04AD29'|| transaction.status=='Sent'&&'#F8332F',
                         fontWeight: "500",
                         fontSize: 12,
                         lineHeight: 17.58,
+                        marginRight:3
                       }}
                     >
                       {transaction.status}
@@ -149,7 +195,8 @@ const DashboardScreen = () => {
                         lineHeight: 17.58,
                       }}
                     >
-                      {transaction.date}
+                      
+                      {date[index]}
                     </Text>
                   </View>
                 </View>
@@ -163,7 +210,8 @@ const DashboardScreen = () => {
                     fontFamily: "SofiaPro",
                   }}
                 >
-                  {transaction.amount}
+                 
+                  ${transaction.amount}.00 USD
                 </Text>
               </View>
             </View>

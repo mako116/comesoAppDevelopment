@@ -40,7 +40,7 @@ export default function RootLayout() {
   }
 
   return (
-    <AuthProvider>
+     <AuthProvider>
       <Stack screenOptions={{ headerShown: false }}>
         {/* Other Screens */}
         <Stack.Screen name="index" />

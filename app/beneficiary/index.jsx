@@ -7,14 +7,15 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomHeader from "../../components/CustomHeader";
-import { AntDesign, EvilIcons } from "@expo/vector-icons";
+import { AntDesign, Entypo, EvilIcons } from "@expo/vector-icons";
 import BeneficiaryModal from "../../components/BeneficiaryModal";
 import AddBeneficiaryModal from "../../components/AddBeneficiaryModa";
 import Confirmation1Modal from "../../components/Confirmation1Modal";
 import Confirmation2Modal from "../../components/Confirmation2Modal";
+import axiosClient from "../../axiosClient";
 
 const Beneficiary = () => {
   const [beneficiaries, setBeneficiaries] = useState([
@@ -65,6 +66,10 @@ const Beneficiary = () => {
     },
     // Add more as needed...
   ]);
+  const [first_name, setFirstName] = useState('');
+  const [last_name, setLastName] = useState("")
+  const [phoneNumber, setPhoneNumber] = useState('')
+  const [email, setemail] = useState('')
   const [modalData, setModalData] = useState({
     image: "",
   });
@@ -79,6 +84,21 @@ const Beneficiary = () => {
     setOpenFirstConfirmation(!openfirstConfirmation);
   const toggleSecondConfirmation = () =>
     setOpenSecondConfirmation(!openSecondConfirmation);
+
+  useEffect(()=>{
+const getBeneficiaries = async ()=>{
+  try {
+    const res = await axiosClient.get('/beneficiary');
+    
+    setBeneficiaries(res.data.beneficiaries);
+  } catch (error) {
+    console.log(error)
+  }
+
+
+}
+getBeneficiaries();
+  }, [])
 
   return (
     <SafeAreaView style={{ flex: 1, paddingHorizontal: "5%" }}>
@@ -111,7 +131,7 @@ const Beneficiary = () => {
               marginLeft: "5%",
             }}
           >
-            Beneficiaries
+           {beneficiaries.length>0 &&'Beneficiaries'} 
           </Text>
           <View
             style={{
@@ -121,7 +141,7 @@ const Beneficiary = () => {
               marginHorizontal: "2%",
             }}
           >
-            {beneficiaries.map((item, index) => (
+            {beneficiaries? beneficiaries.map((item, index) => (
               <TouchableOpacity
                 key={index}
                 style={{
@@ -144,7 +164,7 @@ const Beneficiary = () => {
                   setOpenModal(true);
                 }}
               >
-                <Image
+                {/* <Image
                   source={item.avatar}
                   style={{
                     width: 60,
@@ -152,7 +172,8 @@ const Beneficiary = () => {
                     borderRadius: 30,
                   }}
                   resizeMode="contain"
-                />
+                /> */}
+                <Entypo name="user" size={60} color="black" />
                 <Text
                   style={{
                     marginTop: 10,
@@ -161,7 +182,7 @@ const Beneficiary = () => {
                     fontSize: 13,
                   }}
                 >
-                  {item.name}
+                  {item.first_name} {item.last_name}
                 </Text>
                 <Text
                   style={{
@@ -173,7 +194,9 @@ const Beneficiary = () => {
                   {item.phone}
                 </Text>
               </TouchableOpacity>
-            ))}
+            )):(<View>
+              <Text>No Beneficiaries added yet</Text>
+            </View>)}
           </View>
         </View>
         <TouchableOpacity
@@ -214,6 +237,10 @@ const Beneficiary = () => {
         <AddBeneficiaryModal
           toggleModal={toggleAddBenModal}
           openFirstConfirm={toggleFirstConfirmation}
+          setFirstname={setFirstName}
+          setLastname={setLastName}
+          setPhonenumber={setPhoneNumber}
+          setemail={setemail}
         />
       )}
       {openfirstConfirmation && (
@@ -221,6 +248,10 @@ const Beneficiary = () => {
           toggleModal={toggleFirstConfirmation}
           openSecondConfirm={toggleSecondConfirmation}
           image={modalData.image}
+          email={email}
+          firstName={first_name}
+          lastName={last_name}
+          phone={phoneNumber}
         />
       )}
       {openSecondConfirmation && (

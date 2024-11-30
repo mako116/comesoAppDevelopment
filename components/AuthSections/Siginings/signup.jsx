@@ -5,7 +5,7 @@ import {
   Ionicons,
   SimpleLineIcons,
 } from "@expo/vector-icons";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import CountryPicker, {
   Country,
   CountryCode,
@@ -25,6 +25,7 @@ import SectionsLogin from "@/styles/Login/Login.styles";
 import UncommonStyles from "@/styles/Uncommon.styles";
 import axios from "axios";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { AuthContext } from "@/context/AuthContext";
 
 export default function SignUpScreen() {
   const baseUrl = process.env.EXPO_PUBLIC_BASE_URL;
@@ -39,6 +40,7 @@ export default function SignUpScreen() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const {setUserDetails} = useContext(AuthContext);
 
   // Handle phone number change, only numeric values
   const handlePhoneChange = (number) => {
@@ -79,8 +81,9 @@ export default function SignUpScreen() {
       });
       await AsyncStorage.clear();
       
-      await AsyncStorage.setItem('userDetails', JSON.stringify(response.data.user));
-
+      // await AsyncStorage.setItem('userDetails', JSON.stringify(response.data.user));
+      
+      setUserDetails(response.data.user);
       router.push('/(routes)/login');
       
     } catch (error) {

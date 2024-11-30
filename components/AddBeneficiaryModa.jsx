@@ -5,6 +5,7 @@ import {
     TouchableOpacity,
     TextInput,
     StyleSheet,
+    Alert,
   } from "react-native";
   import React, { useState } from "react";
   import { AntDesign } from "@expo/vector-icons";
@@ -13,14 +14,34 @@ import {
     CountryCode,
   } from "react-native-country-picker-modal";
   import CustomBlueButton from "./CustomBlueButton";
+import axiosClient from "../axiosClient";
   
-  const AddBeneficiaryModal = ({ toggleModal, openFirstConfirm}) => {
+  const AddBeneficiaryModal = ({ toggleModal, setPhonenumber, setLastname, setFirstname,setemail, openFirstConfirm}) => {
+    const[firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('');
+    const [phone, setPhone] = useState("")
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('');
     const [countryCode, setCountryCode] = useState("US");
     const [callingCode, setCallingCode] = useState("1");
     const onSelectCountry = (country) => {
       setCountryCode(country.cca2); // Set the selected country code
       setCallingCode(country.callingCode[0]); // Set the corresponding calling code
     };
+
+    const handleAddBeneficiary = async ()=>{
+      if(!firstName||!lastName || !email || !phone){
+        return Alert.alert('Fields are required', 'All fields are required to continue')
+      }
+
+      setPhonenumber(phone);
+      setFirstname(firstName);
+      setLastname(lastName)
+      setemail(email);
+
+      openFirstConfirm();
+      
+    }
     return (
       <>
         <View
@@ -79,7 +100,7 @@ import {
                 paddingVertical: 5,
               }}
             >
-              <TextInput placeholder="First Name" />
+              <TextInput placeholder="First Name" onChangeText={(val)=>setFirstName(val)}/>
             </View>
             <View
               style={{
@@ -91,7 +112,7 @@ import {
                 paddingVertical: 5,
               }}
             >
-              <TextInput placeholder="Last Name" />
+              <TextInput placeholder="Last Name" onChangeText={(val)=>setLastName(val)} />
             </View>
             <View
               style={{
@@ -117,8 +138,8 @@ import {
                 <TextInput
                   style={styles.phoneInput}
                   keyboardType="numeric"
-                  // value={phoneNumber}
-                  // onChangeText={handlePhoneChange}
+                  value={phone}
+                  onChangeText={(val)=>setPhone(val)}
                   placeholder="Phone number"
                 />
               </View>
@@ -133,7 +154,7 @@ import {
                 paddingVertical: 5,
               }}
             >
-              <TextInput placeholder="Email" />
+              <TextInput placeholder="Email" onChangeText={(val)=>setEmail(val)} />
             </View>
             <View style={{ flexDirection: "row", gap: 5 }}>
               <View
@@ -147,7 +168,7 @@ import {
                   flex: 4,
                 }}
               >
-                <TextInput placeholder="Password" />
+                <TextInput placeholder="Password" onChangeText={(val)=>setPassword(val)} />
               </View>
               <View
                 style={{
@@ -162,7 +183,7 @@ import {
               </View>
             </View>
           </View>
-          <CustomBlueButton text='Add Beneficiary' onPress={openFirstConfirm} toggleModal={toggleModal}/>
+          <CustomBlueButton text='Add Beneficiary' onPress={handleAddBeneficiary} toggleModal={toggleModal}/>
         </View>
       </>
     );

@@ -4,18 +4,20 @@ import { router } from 'expo-router';
 import { AuthContext } from '@/context/AuthContext';
  
 const  OnBoardingScreen =()=> {
-      const { userDetails} = useContext(AuthContext);
+        const { userDetails} = useContext(AuthContext);
+       
      
       
     useEffect(()=>{
         setTimeout(() => {
-            // router.push("/(tabs)/home")
+           
             if(userDetails){
               
               router.push('/(tabs)/home');
             }else{
               router.push("/(routes)/login")
             }
+            // router.push('/(routes)/Welcome-intro');
             
          }, 2000);
     },[])
