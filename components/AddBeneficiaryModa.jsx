@@ -16,9 +16,9 @@ import {
   import CustomBlueButton from "./CustomBlueButton";
 import axiosClient from "../axiosClient";
   
-  const AddBeneficiaryModal = ({ toggleModal, setPhonenumber, setLastname, setFirstname,setemail, openFirstConfirm}) => {
-    const[firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState('');
+  const AddBeneficiaryModal = ({ toggleModal, setPhonenumber, setName,setemail, openFirstConfirm}) => {
+    const[name, setname] = useState('')
+    
     const [phone, setPhone] = useState("")
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('');
@@ -30,13 +30,13 @@ import axiosClient from "../axiosClient";
     };
 
     const handleAddBeneficiary = async ()=>{
-      if(!firstName||!lastName || !email || !phone){
+      if(!name || !email || !phone){
         return Alert.alert('Fields are required', 'All fields are required to continue')
       }
 
       setPhonenumber(phone);
-      setFirstname(firstName);
-      setLastname(lastName)
+      setName(name);
+      
       setemail(email);
 
       openFirstConfirm();
@@ -89,7 +89,7 @@ import axiosClient from "../axiosClient";
           </View>
           
   
-          <View style={{ gap: 10 }}>
+          <View style={{ gap: 10, marginTop:23}}>
             <View
               style={{
                 backgroundColor: "rgba(164, 169, 174, 0.2)",
@@ -100,9 +100,9 @@ import axiosClient from "../axiosClient";
                 paddingVertical: 5,
               }}
             >
-              <TextInput placeholder="First Name" onChangeText={(val)=>setFirstName(val)}/>
+              <TextInput placeholder="Username" onChangeText={(val)=>setname(val)}/>
             </View>
-            <View
+            {/* <View
               style={{
                 backgroundColor: "rgba(164, 169, 174, 0.2)",
                 width: "100%",
@@ -113,7 +113,7 @@ import axiosClient from "../axiosClient";
               }}
             >
               <TextInput placeholder="Last Name" onChangeText={(val)=>setLastName(val)} />
-            </View>
+            </View> */}
             <View
               style={{
                 //   backgroundColor: "white",

@@ -16,7 +16,8 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.davidwoks.comeso"
+      "package": "com.davidwoks.comeso",
+      "googleMapsApiKey":"AIzaSyBrnYlsmSXdyxSCdY2RzQtQ30E9ABYuAI8"
     },
     "web": {
       "bundler": "metro",
@@ -32,6 +33,12 @@
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow Comeso to use your location."
         }
       ]
     ],

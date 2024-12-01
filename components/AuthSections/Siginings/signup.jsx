@@ -123,7 +123,7 @@ export default function SignUpScreen() {
               ]}
               keyboardType="default"
               value={name}
-              placeholder="Name"
+              placeholder="Username"
               onChangeText={(value) => setName(value)}
             />
           </View>

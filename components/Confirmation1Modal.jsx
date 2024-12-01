@@ -13,12 +13,11 @@ import CustomBlueButton from "./CustomBlueButton";
 import axiosClient from "../axiosClient";
 
 
-const Confirmation1Modal = ({ toggleModal, image, openSecondConfirm, email, firstName, lastName, phone, }) => {
+const Confirmation1Modal = ({ toggleModal, image, openSecondConfirm, email, name, phone }) => {
   const handleAddBeneficary = async ()=>{
     try {
       const res = await axiosClient.post('/beneficiary', {
-        first_name:firstName,
-        last_name:lastName,
+        name,
         email,
         phone,
       })
@@ -135,7 +134,7 @@ const Confirmation1Modal = ({ toggleModal, image, openSecondConfirm, email, firs
           </View>
          
           <View style={{ flex: 3 }}>
-            <Text style={{fontFamily:'Alata', fontWeight:800, fontSize:20}}>{firstName} {lastName}</Text>
+            <Text style={{fontFamily:'Alata', fontWeight:800, fontSize:20}}>{name}</Text>
             <Text style={{fontFamily:'Alata',color:'rgba(164, 169, 174, 1)',fontSize:16,fontWeight:"400"}}>{phone}</Text>
             <Text style={{fontFamily:'Alata',color:'rgba(164, 169, 174, 1)',fontSize:16,fontWeight:"400"}}>{email}</Text>
           </View>

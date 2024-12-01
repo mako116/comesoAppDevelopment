@@ -1,11 +1,12 @@
 import React, { useContext, useState } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Alert, ActivityIndicator } from 'react-native';
  import logo from '../../assets/images/logo.png';
 import SectionsLogin from "@/styles/Login/Login.styles";
 import HeaderM from './HeaderM';
 import { router, useLocalSearchParams } from 'expo-router';
 import axiosClient from '../../axiosClient';
 import {AuthContext} from '@/context/AuthContext'
+import { Entypo } from '@expo/vector-icons';
 
 const ConfirmTransfer = () => {
   const [buttonSpinner, setButtonSpinner] = useState(false);
@@ -15,12 +16,13 @@ const ConfirmTransfer = () => {
 
   const handleContinue = async() => {
     try {
+      setButtonSpinner(true);
       const res = await axiosClient.post('/user/transfer-voucher', {
         receiver:name, amount
       })
       if(res.data.status){
         
-       
+       setButtonSpinner(false);
         setUserDetails(prev=>({
           ...prev,
           balance: prev.balance - amount
@@ -29,8 +31,9 @@ const ConfirmTransfer = () => {
       router.push("/(routes)/successfull-transfer")
       }
     } catch (error) {
+      setButtonSpinner(false)
       router.push('/(routes)/failed');
-      Alert.alert('Error', 'An error occured during transfer')
+      
     }
     
 
@@ -49,7 +52,13 @@ const ConfirmTransfer = () => {
 
       {/* Box with Image and Content */}
       <View style={styles.boxContainer}>
-      <Image source={logo} style={styles.absoluteImage} />
+      {/* <Image source={logo} style={styles.absoluteImage} /> */}
+      <Entypo
+                name="user"
+                size={60}
+                color="black"
+                style={styles.absoluteImage}
+              />
 
         
         <View style={styles.textContainer}>

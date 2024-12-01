@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Image,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 import { MaterialIcons, Ionicons, Entypo } from "@expo/vector-icons";
 import HeaderM from "../../screens/MobileTransfer/HeaderM";
@@ -34,8 +35,9 @@ const MobileTransferB = () => {
   });
 
   const [beneficiaries, setBeneficiaries] = useState([]);
+  
 
-  const toggleSelectBeneficiary = (id, firstName, lastName, phone) => {
+  const toggleSelectBeneficiary = (id, name, phone) => {
     if (selectedBeneficiaryId === id) {
       setSelectedBeneficiaryId(null); // Deselect if clicked again
       setUserInfo({
@@ -48,7 +50,7 @@ const MobileTransferB = () => {
       setSelectedBeneficiaryId(id); // Select the new beneficiary
       setUserInfo({
         ...userInfo,
-        Name: firstName + " " + lastName,
+        Name: name
       });
       setPhoneNumber(phone);
     }
@@ -56,11 +58,13 @@ const MobileTransferB = () => {
 
   const handleContinue = async () => {
     try {
+      setButtonSpinner(true)
       const response = await axiosClient.post(`/user/find`, {
         name: userInfo.Name,
       });
 
       if (response.status == 404) {
+        setButtonSpinner(false)
         console.log("status 404");
         return Alert.alert("Not Found", "User not found!");
       }
@@ -73,6 +77,7 @@ const MobileTransferB = () => {
       });
     } catch (error) {
       console.log(error);
+      setButtonSpinner(false);
       Alert.alert("Not Found", "User not Found!");
     }
   };
@@ -139,8 +144,8 @@ const MobileTransferB = () => {
             onPress={() =>
               toggleSelectBeneficiary(
                 item.id,
-                item.first_name,
-                item.last_name,
+                item.name,
+                
                 item.phone
               )
             }
@@ -160,7 +165,7 @@ const MobileTransferB = () => {
                 color="black"
                 style={styles.beneficiaryImage}
               />
-              <Text style={styles.beneficiaryName}>{item.first_name}</Text>
+              <Text style={styles.beneficiaryName}>{item.name}</Text>
             </View>
           </TouchableOpacity>
         )}
@@ -178,7 +183,7 @@ const MobileTransferB = () => {
           style={styles.input}
           keyboardType="default"
           value={userInfo.Name}
-          placeholder="Name"
+          placeholder="Username"
           onChangeText={(value) => setUserInfo({ ...userInfo, Name: value })}
           placeholderTextColor="#8E949A"
         />

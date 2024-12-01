@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { 
   View, 
   Text, 
@@ -9,19 +9,47 @@ import {
 } from "react-native";
 import { EvilIcons, Feather, MaterialIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
+import { AuthContext } from "@/context/AuthContext";
+import axios from "axios";
 
 const SearchScreen = () => {
+  const{location} = useContext(AuthContext);
   const [searchText, setSearchText] = useState("");
+  const [hospitals, setHospitals] = useState([])
+  
+  useEffect(()=>{
+    const getNearestFacilities = async ()=>{
+      
+      if(location){
+        try {
+          const res = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location.coords.latitude}%2C${location.coords.longitude}&radius=1500&type=restaurant&keyword=cruise&key=${process.env.EXPO_PUBLIC_GOOGLE_MAPS_API}`)
+          if(res.data.results.length > 0){
+            setHospitals(res.data.results);
+          }
+        } catch (error) {
+          console.log(error)
+        }
+      }
+     
+      
+    }
+    getNearestFacilities();
+  }, [])
 
-  const transactions = [
-    { id: "1", title: "University Teaching Hospital, Ibadan, Oyo state", para: "Off New Bodija, Ibadan 200132, Oyo State, Nigeria.",  },
-    { id: "2", title: "Allen Avenue, Maryland 200132, Lagos State, Nige.", para: "Off New Bodija, Ibadan 200132, Oyo State, Nigeria.",  },
-    { id: "3", title: "Allen Avenue, Maryland 200132, Lagos State, Nige.", para: "Off New Bodija, Ibadan 200132, Oyo State, Nigeria.", },
-  ];
-
-  const filteredTransactions = transactions.filter((transaction) =>
-    transaction.title.toLowerCase().includes(searchText.toLowerCase())
+  // const transactions = [
+  //   { id: "1", title: "University Teaching Hospital, Ibadan, Oyo state", para: "Off New Bodija, Ibadan 200132, Oyo State, Nigeria.",  },
+  //   { id: "2", title: "Allen Avenue, Maryland 200132, Lagos State, Nige.", para: "Off New Bodija, Ibadan 200132, Oyo State, Nigeria.",  },
+  //   { id: "3", title: "Allen Avenue, Maryland 200132, Lagos State, Nige.", para: "Off New Bodija, Ibadan 200132, Oyo State, Nigeria.", },
+  // ];
+useEffect(()=>{
+if(searchText){
+  const filteredTransactions = hospitals?.filter((transaction) =>
+    transaction.name.toLowerCase().includes(searchText.toLowerCase())
   );
+  setHospitals(filteredTransactions);
+}
+}, [searchText])
+  
 
   const renderTransactionItem = ({ item }) => (
     <View style={styles.transactionItem}>
@@ -29,10 +57,10 @@ const SearchScreen = () => {
         <View style={{flexDirection:'row', gap:5, justifyContent:'center', alignItems:'center'}}>
           <EvilIcons name="location" size={20} color="#0A2EE2" />
           <View>
-          <Text style={styles.transactionTitle}>{item.title}</Text>
+          <Text style={styles.transactionTitle}>{item.name}</Text>
           <View style={styles.transactionSubDetails}>
             
-            <Text style={styles.transactionDate}>{item.para}</Text>
+            <Text style={styles.transactionDate}>{item.vicinity}</Text>
           </View>
         </View>
         </View>
@@ -60,7 +88,7 @@ const SearchScreen = () => {
       </View>
     </View>
 
-    <TouchableOpacity style={styles.recentTransactionsContainer} onPress={()=>router.push("search-facilities")}>
+    <TouchableOpacity style={styles.recentTransactionsContainer} onPress={()=>router.push({pathname:"search-facilities"})}>
       <EvilIcons name="location" size={24} color="white" />
       <Text style={styles.recentText}>Nearest facilities close to you</Text>
     </TouchableOpacity>
@@ -72,11 +100,16 @@ const SearchScreen = () => {
   return (
     <FlatList
       ListHeaderComponent={renderHeader}
-      data={filteredTransactions}
+      data={hospitals}
       // ListHeaderComponent={renderRecentItem}
       renderItem={renderTransactionItem}
       keyExtractor={(item) => item.id}
       contentContainerStyle={styles.scrollViewContainer}
+      ListEmptyComponent={()=>(
+        <View style={{top:'-5%'}}>
+          <Text style={{textAlign:'center'}}>No Hospitals Found</Text>
+        </View>
+      )}
     />
   );
 };

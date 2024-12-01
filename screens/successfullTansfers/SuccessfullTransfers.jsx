@@ -20,7 +20,7 @@ const SuccessfullTransfers = () => {
 
       {/* Description */}
       <Text style={styles.description}>
-        Your money has been transferred successfully.
+        Your voucher has been transferred successfully.
       </Text>
 
       {/* Box with Image and Content */}
@@ -34,7 +34,7 @@ const SuccessfullTransfers = () => {
 
       <View>
         <TouchableOpacity
-          // onPress={handleContinue}
+          onPress={()=>router.push('/(tabs)/home')}
           style={[SectionsLogin.loginButtons]}
           disabled={buttonSpinner}
         >
@@ -42,7 +42,7 @@ const SuccessfullTransfers = () => {
             <ActivityIndicator size="small" color={"white"} />
           ) : (
             <Text style={[SectionsLogin.loginButtonText, { fontFamily: 'Alata', fontWeight: "700" }]}>
-              View Receipt
+              Go back
             </Text>
           )}
         </TouchableOpacity>

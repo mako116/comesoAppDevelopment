@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image, TextInput, ActivityIndicator, Alert } from 'react-native';
-import { MaterialIcons, Fontisto } from '@expo/vector-icons';
+import { MaterialIcons, Fontisto, Entypo } from '@expo/vector-icons';
 import CountryPicker from 'react-native-country-picker-modal';
 import logo from '../../assets/images/logo.png';
 import HeaderM from '../MobileTransfer/HeaderM';
@@ -13,6 +13,9 @@ const Confirm = () => {
   const {userDetails} = useContext(AuthContext)
   
     const handleContinue = () => {
+      if(!fromAmount){
+        return Alert.alert('Enter Amount', 'Please enter amount to continue')
+      }
       if(fromAmount > userDetails.balance){
         return Alert.alert('Insufficient funds', 'You do not have sufficient vouchers to send');
       }
@@ -63,13 +66,7 @@ const Confirm = () => {
     }
   };
 
-  const handleConvert = async ()=>{
-    const value = axios.get(`https://api.exchangeratesapi.io/v1/convert
-    ? access_key = ${process.env.EXPO_PUBLIC_CURRENCY_EXCHANGE_API_KEY}
-    & from = ${fromCountry.currency}
-    & to = ${toCountry.currency}
-    & amount = ${parseInt(fromAmount, 10)}`)
-  }
+  
 
   return (
     <View style={styles.container}>
@@ -80,7 +77,13 @@ const Confirm = () => {
       </View>
       <View style={styles.recipientInfo}>
         <View style={styles.recipientTextContainer}>
-          <Image source={logo} style={styles.beneficiaryImage} />
+          {/* <Image source={logo} style={styles.beneficiaryImage} /> */}
+          <Entypo
+                name="user"
+                size={60}
+                color="black"
+                style={styles.beneficiaryImage}
+              />
           <View>
             <Text style={styles.recipientName}>{name}</Text>
             <Text style={styles.recipientPhone}>{phone}</Text>
@@ -90,13 +93,13 @@ const Confirm = () => {
           <MaterialIcons name="edit" size={14} color="#0C73C2" />
         </TouchableOpacity>
       </View>
-      <View>
+      {/* <View>
         <Text style={styles.recipientHead}>Country currencies</Text>
-      </View>
+      </View> */}
 
       {/* Currency Flags and Transfer Section */}
-      <View style={styles.currencyContainer}>
-        {/* From Country */}
+      {/* <View style={styles.currencyContainer}>
+
         <View style={styles.flagContainer}>
           <Text style={styles.labelText}>From</Text>
           <TouchableOpacity style={styles.flagButton}>
@@ -113,12 +116,12 @@ const Confirm = () => {
           <Text style={styles.currencyText}>{fromCountry.currency}</Text>
         </View>
 
-        <TouchableOpacity style={styles.transferIcon} onPress={handleConvert}>
+        <TouchableOpacity style={styles.transferIcon}>
           <Fontisto name="arrow-swap" size={22} color="black" />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         {/* To Country */}
-        <View style={styles.flagContainer}>
+        {/* <View style={styles.flagContainer}>
           <Text style={styles.labelText}>To</Text>
           <TouchableOpacity style={styles.flagButton}>
             <CountryPicker
@@ -133,7 +136,7 @@ const Confirm = () => {
           </TouchableOpacity>
           <Text style={styles.currencyText}>{toCountry.currency}</Text>
         </View>
-      </View>
+      </View> */}
 
       <View style={styles.transferDetailsContainer}>
         <Text style={styles.transferDetailsHeader}>Transfer Details</Text>
@@ -143,27 +146,27 @@ const Confirm = () => {
   <TextInput
     style={styles.input}
     keyboardType="numeric"
-    placeholder="Enter amount"
+    placeholder="Enter voucher amount"
     value={fromAmount}
     onChangeText={(text) => setFromAmount(text)}
     onFocus={() => setFromInputFocused(true)}
     onBlur={() => setFromInputFocused(false)}
   />
-  <Text style={styles.currencyLabel}>{fromCountry.currency}</Text>
+  {/* <Text style={styles.currencyLabel}>{fromCountry.currency}</Text> */}
 </View>
-<View style={[styles.transferRow,
+{/* <View style={[styles.transferRow,
       toInputFocused && { borderColor: '#0A2EE2', borderWidth: 2 },]}>  
       <TextInput
     style={styles.input}
     keyboardType="numeric"
-    placeholder="Enter amount"
+    placeholder="Enter voucher amount"
     value={toAmount}
     onChangeText={(text) => setToAmount(text)}
     onFocus={() => setToInputFocused(true)}
     onBlur={() => setToInputFocused(false)}
   />
   <Text style={styles.currencyLabel}>{toCountry.currency}</Text>
-</View>
+</View> */}
 </View>
 
 

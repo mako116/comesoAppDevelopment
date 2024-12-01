@@ -27,8 +27,8 @@ const Beneficiary = () => {
     // },
 
   ]);
-  const [first_name, setFirstName] = useState('');
-  const [last_name, setLastName] = useState("")
+  const [name, setName] = useState('');
+  
   const [phoneNumber, setPhoneNumber] = useState('')
   const [email, setemail] = useState('')
   const [modalData, setModalData] = useState({
@@ -143,7 +143,7 @@ getBeneficiaries();
                     fontSize: 13,
                   }}
                 >
-                  {item.first_name} {item.last_name}
+                  {item.name} 
                 </Text>
                 <Text
                   style={{
@@ -198,8 +198,8 @@ getBeneficiaries();
         <AddBeneficiaryModal
           toggleModal={toggleAddBenModal}
           openFirstConfirm={toggleFirstConfirmation}
-          setFirstname={setFirstName}
-          setLastname={setLastName}
+          setName={setName}
+          
           setPhonenumber={setPhoneNumber}
           setemail={setemail}
         />
@@ -210,8 +210,8 @@ getBeneficiaries();
           openSecondConfirm={toggleSecondConfirmation}
           image={modalData.image}
           email={email}
-          firstName={first_name}
-          lastName={last_name}
+          name={name}
+          
           phone={phoneNumber}
         />
       )}
