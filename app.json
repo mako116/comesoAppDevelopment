@@ -17,7 +17,7 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.davidwoks.comeso",
-      "googleMapsApiKey":"AIzaSyBrnYlsmSXdyxSCdY2RzQtQ30E9ABYuAI8"
+      
     },
     "web": {
       "bundler": "metro",
