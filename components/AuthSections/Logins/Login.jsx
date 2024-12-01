@@ -64,6 +64,7 @@ export default function LoginScreen() {
   };
 
   const handleSignIn = async () => {
+    
     if (!email || !password) {
       return Alert.alert(
         "All fields are required",

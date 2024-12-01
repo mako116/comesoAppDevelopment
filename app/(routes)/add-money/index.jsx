@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, TextInput } from "react-native";
+import { View, Text, Image, TouchableOpacity, TextInput, Alert } from "react-native";
 import React, { useContext, useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Paystack, paystackProps } from "react-native-paystack-webview";
@@ -179,7 +179,12 @@ const AddMoney = () => {
             borderRadius: 10,
             justifyContent: "center",
           }}
-          onPress={() => paystackWebViewRef.current.startTransaction()}
+          onPress={() => {
+            if(amount ==0){
+              return Alert.alert('Amount Required', 'Please enter amount of voucher you want to add')
+            }
+            paystackWebViewRef.current.startTransaction();
+          }}
         >
           <Image
             resizeMode="contain"
