@@ -36,6 +36,7 @@ export default function SignUpScreen() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [countryCode, setCountryCode] = useState("US"); // Default to 'US'
   const [callingCode, setCallingCode] = useState("1"); // Default calling code for 'US'
+  
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -54,11 +55,12 @@ export default function SignUpScreen() {
     setCallingCode(country.callingCode[0]); // Set the corresponding calling code
   };
 
-  const handlePrint = () => {
-    router.push("/(routes)/finger-print");
-  };
+  // const handlePrint = () => {
+  //   router.push("/(routes)/finger-print");
+  // };
 
   const handleSignUp = async () => {
+    
     if (!agreePrivacy || !agreeTerms) {
       return Alert.alert(
         "Please Agree with our terms and Privacy",
@@ -81,7 +83,9 @@ export default function SignUpScreen() {
       });
       await AsyncStorage.clear();
       
-      // await AsyncStorage.setItem('userDetails', JSON.stringify(response.data.user));
+      await AsyncStorage.setItem('userDetails', JSON.stringify(response.data.user));
+       await AsyncStorage.setItem('authToken', response.data.token);
+      const tokens = await AsyncStorage.getItem('authToken');
       
       setUserDetails(response.data.user);
       router.push('/(routes)/login');
@@ -173,7 +177,7 @@ export default function SignUpScreen() {
             }}
           >
             {/* Password Input */}
-            <View style={{ width: "80%" }}>
+            <View style={{ width: "100%" }}>
               <TextInput
                 style={[SectionsLogin.input, { fontFamily: "SofiaPro" }]}
                 secureTextEntry={!isPasswordVisible}
@@ -197,9 +201,9 @@ export default function SignUpScreen() {
               </TouchableOpacity>
             </View>
             {/* Finger print */}
-            <TouchableOpacity onPress={handlePrint}>
+            {/* <TouchableOpacity onPress={handlePrint}>
               <Ionicons name="finger-print-outline" size={44} color="black" />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
 
           <View style={styles.checkboxContainer}>

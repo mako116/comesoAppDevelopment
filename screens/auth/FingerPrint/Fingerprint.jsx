@@ -4,6 +4,7 @@ import LoginScreen from '@/components/AuthSections/Logins/Login';
 import FingerPrintScreen from '@/components/AuthSections/FingerPrinting/FingerPrinting';
   
 const Fingerprint = () =>{
+  
   return (
     <View style={styles.background}>
     <View

@@ -16,7 +16,7 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.davidwoks.comeso",
+      "package": "com.davidwoks.comeso"
       
     },
     "web": {
@@ -39,6 +39,12 @@
         "expo-location",
         {
           "locationAlwaysAndWhenInUsePermission": "Allow Comeso to use your location."
+        }
+      ],
+      [
+        "expo-local-authentication",
+        {
+          "faceIDPermission": "Allow Comeso to use Face ID."
         }
       ]
     ],

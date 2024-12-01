@@ -6,6 +6,7 @@ import Header from "../../screens/Dashboard/Header";
 import { router } from "expo-router";
 import { AuthContext } from "@/context/AuthContext";
 import axiosClient from '../../axiosClient';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const DashboardScreen = () => {
   const [user, setUser] = useState(null);
@@ -30,6 +31,7 @@ const DashboardScreen = () => {
 
   useEffect(()=>{
     const getUser = async ()=>{
+     
       try {
         
         const response = await axiosClient.get('/user');
