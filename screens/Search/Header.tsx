@@ -59,7 +59,8 @@ const styles = StyleSheet.create({
     lineHeight:27.72
   },
   bellContainer: {
-    padding:20,
+    padding:10,
+    borderRadius:"50%",
     backgroundColor:"#A4A9AE40",
     position: 'relative', // To position the notification dot relative to the bell icon
   },

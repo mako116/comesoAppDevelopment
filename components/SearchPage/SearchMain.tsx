@@ -23,7 +23,7 @@ const SearchScreen: React.FC = () => {
 
   const transactions: Transaction[] = [
     { id: "1", title: "Account Top-up", type: "Received", date: "Feb 25, 2022", amount: "$5.00" },
-    { id: "2", title: "Grocery Shopping", type: "Spent", date: "Feb 24, 2022", amount: "$50.00" },
+    { id: "2", title: "Grocery Shoppings", type: "Spent", date: "Feb 24, 2022", amount: "$50.00" },
     { id: "3", title: "Restaurant Bill", type: "Spent", date: "Feb 23, 2022", amount: "$30.00" },
   ];
 
