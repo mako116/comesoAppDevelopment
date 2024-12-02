@@ -144,13 +144,13 @@ const SearchFacilities = () => {
             </View>
           ))
         ) : (
-          <TouchableOpacity
-            onPress={() => router.push({ pathname: "/(routes)/map" })}
+          <View
+            
           >
             <Text style={{ marginTop: 10, textAlign: "center" }}>
               No Hospitals Found
             </Text>
-          </TouchableOpacity>
+          </View>
         )}
 
         {/* <View style={{paddingHorizontal:'5%'}}>

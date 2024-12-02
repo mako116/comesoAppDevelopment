@@ -66,10 +66,10 @@ const MobileTransferB = () => {
         name: userInfo.Name,
       });
 
-      if (response.status == 404) {
+      if (response.data.error) {
         setButtonSpinner(false)
-        console.log("status 404");
-        return Alert.alert("Not Found", "User not found!");
+        
+        return Alert.alert("Error", response.data.error);
       }
 
       const receiver = response.data.user;
@@ -227,7 +227,7 @@ const MobileTransferB = () => {
             gap: 10,
           }}
         >
-          <View style={{ width: "83%" }}>
+          <View style={{ width: "100%" }}>
             <TextInput
               style={styles.input}
               secureTextEntry={!isPasswordVisible}
@@ -250,7 +250,7 @@ const MobileTransferB = () => {
           </View>
 
           {/* Fingerprint Icon */}
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={{
               padding: 10,
               marginTop: -10,
@@ -259,7 +259,7 @@ const MobileTransferB = () => {
             }}
           >
             <Ionicons name="finger-print-outline" size={30} color="black" />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
 
         {/* Continue Button */}

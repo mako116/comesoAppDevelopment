@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+import { router } from 'expo-router';
 
 const axiosClient = axios.create({
     baseURL: `${process.env.EXPO_PUBLIC_BASE_URL}/api`,
@@ -34,6 +35,7 @@ axiosClient.interceptors.response.use(
             if (response && response.status === 401) {
                 
                 await AsyncStorage.removeItem('authToken'); // Await the token removal
+                router.push('/login');
             }
         } catch (err) {
             console.error('Error handling response error:', err);

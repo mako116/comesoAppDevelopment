@@ -44,6 +44,11 @@ import axiosClient from "../axiosClient";
       if(res.data.status ==false){
         return Alert.alert('Incorrect password','The password you entered is incorrect');
       }
+
+      const response = await axiosClient.post('/user/find', {name});
+      if(response.data.error){
+        return Alert.alert('Error', response.data.error);
+      }
       openFirstConfirm();
       
     }
