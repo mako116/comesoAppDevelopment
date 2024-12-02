@@ -75,6 +75,7 @@ export default function SignUpScreen() {
       );
     }
     try {
+      setButtonSpinner(true)
       const response = await axios.post(`${baseUrl}/api/sign-up`, {
         name,
         email,
@@ -82,15 +83,17 @@ export default function SignUpScreen() {
         phone: "+" + callingCode + phoneNumber,
       });
       await AsyncStorage.clear();
+      setButtonSpinner(false)
       
       await AsyncStorage.setItem('userDetails', JSON.stringify(response.data.user));
        await AsyncStorage.setItem('authToken', response.data.token);
       const tokens = await AsyncStorage.getItem('authToken');
       
       setUserDetails(response.data.user);
-      router.push('/(routes)/login');
+      router.push('/login');
       
     } catch (error) {
+      setButtonSpinner(false);
       console.log(error.response.data.message, error);
     }
   };
@@ -286,7 +289,7 @@ export default function SignUpScreen() {
             >
               Already have an account?
             </Text>
-            <TouchableOpacity onPress={() => router.push("/(routes)/login")}>
+            <TouchableOpacity onPress={() => router.push("/login")}>
               <Text
                 style={[SectionsLogin.signUpText, { fontFamily: "SofiaPro" }]}
               >

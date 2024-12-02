@@ -39,6 +39,11 @@ import axiosClient from "../axiosClient";
       
       setemail(email);
 
+      const res = await axiosClient.post('/user/check-password', {password});
+      
+      if(res.data.status ==false){
+        return Alert.alert('Incorrect password','The password you entered is incorrect');
+      }
       openFirstConfirm();
       
     }
@@ -168,9 +173,9 @@ import axiosClient from "../axiosClient";
                   flex: 4,
                 }}
               >
-                <TextInput placeholder="Password" onChangeText={(val)=>setPassword(val)} />
+                <TextInput placeholder="Password" onChangeText={(val)=>setPassword(val)} secureTextEntry={true}/>
               </View>
-              <View
+              {/* <View
                 style={{
                   backgroundColor: "rgba(164, 169, 174, 0.2)",
                   flex: 1,
@@ -180,7 +185,7 @@ import axiosClient from "../axiosClient";
                 }}
               >
                 <Image source={require("../assets/images/fingerprint.png")} />
-              </View>
+              </View> */}
             </View>
           </View>
           <CustomBlueButton text='Add Beneficiary' onPress={handleAddBeneficiary} toggleModal={toggleModal}/>

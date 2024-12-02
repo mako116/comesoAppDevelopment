@@ -15,7 +15,7 @@ const FingerPrintScreen = () => {
         "Biometric Authentication is not supported on this device. Please sign up normally"
       );
 
-      return router.push('/(routes)/signup');
+      return router.push('/signup');
     }
     const savedBiometrics = await LocalAuthentication.isEnrolledAsync();
     if(!savedBiometrics){

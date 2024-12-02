@@ -5,8 +5,9 @@ import {
   Image,
   TextInput,
   StyleSheet,
+  Alert,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import CustomHeader from "./CustomHeader";
 import { AntDesign, Feather } from "@expo/vector-icons";
 import CustomBlueButton from "./CustomBlueButton";
@@ -14,6 +15,7 @@ import axiosClient from "../axiosClient";
 
 
 const Confirmation1Modal = ({ toggleModal, image, openSecondConfirm, email, name, phone }) => {
+  const [found, setFound] = useState(true)
   const handleAddBeneficary = async ()=>{
     try {
       const res = await axiosClient.post('/beneficiary', {
@@ -21,6 +23,10 @@ const Confirmation1Modal = ({ toggleModal, image, openSecondConfirm, email, name
         email,
         phone,
       })
+      if(res.data.status ==false){
+        setFound(false);
+        
+      }
     } catch (error) {
       console.log(error);
     }
@@ -154,6 +160,9 @@ const Confirmation1Modal = ({ toggleModal, image, openSecondConfirm, email, name
 
       onPress={()=>{
         handleAddBeneficary();
+        if(!found){
+          return Alert.alert('Not Found', 'Beneficiary not found');
+        }
         toggleModal();
         openSecondConfirm();
       }}

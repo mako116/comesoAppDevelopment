@@ -44,17 +44,17 @@ export default function RootLayout() {
       <Stack screenOptions={{ headerShown: false }}>
         {/* Other Screens */}
         <Stack.Screen name="index" />
-        <Stack.Screen name="(routes)/Welcome-intro/index" />
+        <Stack.Screen name="(routes)/Welcome-intro" />
         <Stack.Screen
-          name="(tabs)"
+          name="(tabs)/home"
           options={{
             headerShown: false,
           }}
         />
         {/* Add the Confirmation screen here */}
 
-        <Stack.Screen name="(routes)/successfull-transfer/index" />
-        <Stack.Screen name="(routes)/TrfConfirm/index" />
+        <Stack.Screen name="(routes)/successfull-transfer" />
+        <Stack.Screen name="(routes)/TrfConfirm" />
       </Stack>
     </AuthProvider>
   );

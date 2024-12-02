@@ -10,6 +10,7 @@ import {
   import CustomHeader from "./CustomHeader";
   import { AntDesign, Feather } from "@expo/vector-icons";
   import CustomBlueButton from "./CustomBlueButton";
+import { router } from "expo-router";
   
   const Confirmation2Modal = ({ toggleModal }) => {
     return (
@@ -85,7 +86,7 @@ import {
         
           marginBottom: 20,
         }}
-        onPress={toggleModal}
+        onPress={()=>router.push('/(tabs)/home')}
         
       >
         
@@ -96,7 +97,7 @@ import {
             marginLeft: 10,
           }}
         >
-          Confirm
+          Go back
         </Text>
       </TouchableOpacity>
         </View>

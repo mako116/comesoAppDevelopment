@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, TextInput, Alert } from "react-native";
+import { View, Text, Image, TouchableOpacity, TextInput, Alert, StyleSheet } from "react-native";
 import React, { useContext, useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Paystack, paystackProps } from "react-native-paystack-webview";
@@ -15,7 +15,36 @@ const AddMoney = () => {
   const [amount, setAmount] = useState(0);
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <CustomHeader text="Add Money" />
+      <View style={styles.container}>
+      <View style={styles.row}>
+        <TouchableOpacity onPress={()=>router.push('/(tabs)/home')} style={styles.profileContainer}>
+          <Image 
+            source={require('../../../assets/images/headerback.png')} 
+            width={30}
+            height={30}
+            resizeMode='contain'
+            style={styles.profileImage}
+          />
+          
+          
+        </TouchableOpacity>
+
+        <View style={styles.greetingContainer}>
+          <Text style={styles.greetingText}>Add Voucher</Text>
+        </View>
+
+        <View style={styles.bellContainer}>
+        <Image 
+            source={require('../../../assets/images/notificationIcon.png')} 
+            style={styles.profileImage}
+            width={30}
+            height={30}
+            resizeMode='contain'
+          />
+          
+        </View>
+      </View>
+    </View>
       <Paystack
         paystackKey={process.env.EXPO_PUBLIC_PAYSTACK_TEST_PUBLIC}
         billingEmail={userDetails.email}
@@ -252,3 +281,47 @@ const AddMoney = () => {
 };
 
 export default AddMoney;
+
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: 30,
+    paddingHorizontal:23,
+     
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    
+    alignItems: 'center',
+  },
+  profileContainer: {
+    position: 'relative', // To position the notification dot relative to the image
+  },
+  profileImage: {
+    width: 40,
+    height: 40,
+    borderRadius: 30,
+  },
+  greetingContainer: {
+    flex: 1, // To push bell icon to the right side
+    alignItems: 'center',
+  },
+  greetingText: {
+    fontSize: 22,
+    fontWeight: '600',
+    lineHeight:27.72,
+    fontFamily:'Sora'
+  },
+  bellContainer: {
+    position: 'relative', // To position the notification dot relative to the bell icon
+  },
+  notificationDot: {
+    position: 'absolute',
+    top: -1,
+    right: -1,
+    width: 10,
+    height: 10,
+    borderRadius: 5, // Circular dot
+    backgroundColor: '#E73726',
+  },
+});

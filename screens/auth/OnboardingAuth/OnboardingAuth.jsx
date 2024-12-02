@@ -7,7 +7,7 @@ import { router } from "expo-router";
 const  OnboardingAuth =()=> {
 
   const handsignin = () =>{
-    router.push("/(routes)/login")
+    router.push("/login")
   }
   return (
     <ScrollView

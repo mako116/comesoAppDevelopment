@@ -11,6 +11,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const DashboardScreen = () => {
   const [user, setUser] = useState(null);
    const [transactions, setTransactions] = useState([]);
+   const {setUserDetails} = useContext(AuthContext);
 
   const date = transactions?.map(item=>{
     const date = new Date(item.created_at); // Example date
@@ -37,6 +38,7 @@ const DashboardScreen = () => {
         const response = await axiosClient.get('/user');
         setUser(response.data.user);
         setTransactions(response.data.transactions);
+        setUserDetails(response.data.user);
        
         
       } catch (error) {
@@ -120,14 +122,14 @@ if(!user){
               <TouchableOpacity onPress={()=>router.push('/(tabs)/send')} style={[Dashs.actionBox, {backgroundColor:"#0A2EE2"}]}>
                 <Image source={require('../../assets/images/sendmoni.png')} style={Dashs.icon} />
               </TouchableOpacity>
-              <Text style={Dashs.actionBoxText}>Send Money</Text>
+              <Text style={Dashs.actionBoxText}>Send Voucher</Text>
             </View>
 
             <View style={Dashs.actionBoxContainer}>
               <TouchableOpacity onPress={()=>router.push('/(routes)/add-money')} style={[Dashs.actionBox, {backgroundColor:"#A4A9AE26"}]}>
                 <Ionicons name="add-circle-outline" size={20} color="#0A2EE2BF" />
               </TouchableOpacity>
-              <Text style={Dashs.actionBoxText}>Add Money</Text>
+              <Text style={Dashs.actionBoxText}>Add Voucher</Text>
             </View>
 
             <View style={Dashs.actionBoxContainer}>

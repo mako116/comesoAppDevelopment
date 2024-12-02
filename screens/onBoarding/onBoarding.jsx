@@ -15,7 +15,7 @@ const  OnBoardingScreen =()=> {
               
               router.push('/(tabs)/home');
             }else{
-              router.push("/(routes)/login")
+              router.push("/login")
             }
             // router.push('/(routes)/Welcome-intro');
             

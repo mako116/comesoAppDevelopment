@@ -42,17 +42,17 @@ export default function LoginScreen() {
         "Biometric Authentication is not supported on this device. Please sign up normally"
       );
 
-      return router.push("/(routes)/signup");
+      return router.push("/signup");
     }
     
     const savedBiometrics = await LocalAuthentication.isEnrolledAsync();
     if (!savedBiometrics) {
       return Alert.alert(
-        "Biometric record not found",
+        "No Biometric set for this device",
         "Please login with your password"
       );
     }
-    const biometricAuth = await LocalAuthentication.authenticateAsync({
+     await LocalAuthentication.authenticateAsync({
       promptMessage: "Login to Comeso with your fingerprint",
       cancelLabel: "Cancel",
       disableDeviceFallback: true,
@@ -218,7 +218,7 @@ export default function LoginScreen() {
             >
               Don’t have an account?
             </Text>
-            <TouchableOpacity onPress={() => router.push("/(routes)/signup")}>
+            <TouchableOpacity onPress={() => router.push("/signup")}>
               <Text style={SectionsLogin.signUpText}>Sign up</Text>
             </TouchableOpacity>
           </View>

@@ -57,6 +57,9 @@ const MobileTransferB = () => {
   };
 
   const handleContinue = async () => {
+    if(userInfo.password ==''){
+      return Alert.alert('All fields are required', 'Fill all fields to continue')
+    }
     try {
       setButtonSpinner(true)
       const response = await axiosClient.post(`/user/find`, {
@@ -70,6 +73,12 @@ const MobileTransferB = () => {
       }
 
       const receiver = response.data.user;
+
+      const res = await axiosClient.post('/user/check-password', {password:userInfo.password});
+      if(res.data.status ==false){
+        setButtonSpinner(false);
+        return Alert.alert('Incorrect password!', 'The Password you entered is incorrect')
+      }
 
       router.push({
         pathname: "/(routes)/TrfConfirm",
@@ -223,7 +232,7 @@ const MobileTransferB = () => {
               style={styles.input}
               secureTextEntry={!isPasswordVisible}
               value={userInfo.password}
-              placeholder="Password"
+              placeholder="Input your password"
               onChangeText={(value) =>
                 setUserInfo({ ...userInfo, password: value })
               }
