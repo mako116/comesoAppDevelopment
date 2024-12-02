@@ -42,7 +42,7 @@ export const commonstyles = StyleSheet.create({
      buttonWrapper:{
         backgroundColor: "#2467ec",
         width: wp("87%"),
-        paddingVertical:20,
+        paddingVertical:15,
         // paddingHorizontal:46,
         borderRadius:25,
         marginTop:30
@@ -58,17 +58,22 @@ export const commonstyles = StyleSheet.create({
         display: "none", // Hides the default active dot
       },
     title:{
-        fontSize: hp("3.5%"),
+
+        fontSize:  18,
+        fontWeight:"700",
+        lineHeight:21.6,
         textAlign:"center",
         color:"#0A2EE2"
     },
     description:{
-         fontSize: hp("2.5%"),
-         color:"#575757",
+         fontSize: 24,
+         fontWeight:"600",
+         lineHeight:28.8,
+         color:"#333333",
         textAlign:"center"
     },
     welcomeButton:{
-       backgroundColor:"#2467ec",
+       backgroundColor:"#0A2EE2",
        width: responsiveWidth(88),
        height: responsiveHeight(5.5),
        alignSelf:"center",
