@@ -4,13 +4,9 @@ import React from 'react'
 
 const  ForgottenScreen =()=> {
   return (
-<<<<<<< HEAD:app/(tabs)/home/index.tsx
-    <DashboardMain/>
-=======
     <View>
       <Text>ForgottenScreen</Text>
     </View>
->>>>>>> ca172e4604f7c42285ba23da255515c37d04301d:components/AuthSections/ForgottenScreen/ForgottenScreen.jsx
   )
 }
 

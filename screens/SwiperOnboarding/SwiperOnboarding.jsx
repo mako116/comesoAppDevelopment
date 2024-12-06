@@ -3,6 +3,7 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import AppIntroSlider from "react-native-app-intro-slider";
 import { router } from "expo-router"; // Assuming you're using expo-router for navigation
 import { commonstyles } from "@/styles/common/common.style";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const onboardingSwiperData = [
   {
@@ -59,13 +60,22 @@ export default function WelcomeIntroScreen() {
 
       {/* Button Section */}
       <TouchableOpacity
-        onPress={() => router.push("/(routes)/onboarding-section")}
+        onPress={() => {
+          const getStarted = async ()=>{
+            await AsyncStorage.clear();
+            await AsyncStorage.removeItem('onboarding');
+            await AsyncStorage.setItem('onboarding', 'completed');
+            router.push("/(routes)/onboarding-section")
+          }
+          getStarted();
+
+        }}
         style={[commonstyles.buttonWrapper, { top: "-7.5%" }]}
       >
         <Text style={[commonstyles.buttonText, { fontFamily: 'Poppins',fontSize: 24,
          fontWeight:"600",
           }]}>
-          Getting Started
+          Get Started
         </Text>
       </TouchableOpacity>
     </View>
