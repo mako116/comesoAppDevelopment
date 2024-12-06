@@ -21,26 +21,17 @@
     "@react-navigation/drawer": "^7.0.7",
     "@react-navigation/native": "^7.0.12",
     "@react-navigation/stack": "^7.0.5",
-<<<<<<< HEAD
-    "expo": "~52.0.9",
-=======
     "axios": "^1.7.7",
     "expo": "~52.0.7",
->>>>>>> ca172e4604f7c42285ba23da255515c37d04301d
     "expo-blur": "~14.0.1",
     "expo-constants": "~17.0.3",
     "expo-font": "~13.0.1",
     "expo-haptics": "~14.0.0",
     "expo-linear-gradient": "^14.0.1",
-<<<<<<< HEAD
-    "expo-linking": "~7.0.3",
-    "expo-router": "~4.0.7",
-=======
     "expo-linking": "~7.0.2",
     "expo-local-authentication": "~15.0.1",
     "expo-location": "~18.0.2",
     "expo-router": "~4.0.6",
->>>>>>> ca172e4604f7c42285ba23da255515c37d04301d
     "expo-splash-screen": "^0.29.13",
     "expo-status-bar": "~2.0.0",
     "expo-symbols": "~0.2.0",
@@ -61,12 +52,8 @@
     "react-native-safe-area-context": "4.12.0",
     "react-native-screens": "~4.1.0",
     "react-native-web": "~0.19.13",
-<<<<<<< HEAD
-    "react-native-webview": "^13.12.2"
-=======
     "react-native-webview": "^13.12.4",
     "react-world-flags": "^1.6.0"
->>>>>>> ca172e4604f7c42285ba23da255515c37d04301d
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
